@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { base44 } from "@/api/base44Client";
 import {
   Newspaper,
   LayoutDashboard,
@@ -12,7 +11,6 @@ import {
   Users,
   LogOut,
   Menu,
-  X,
   ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -40,22 +38,32 @@ export default function Layout({ children, currentPageName }) {
 
   useEffect(() => {
     loadUser();
-  }, []);
+  }, [currentPageName]);
 
-  const loadUser = async () => {
-    const isAuth = await base44.auth.isAuthenticated();
-    if (isAuth) {
-      const userData = await base44.auth.me();
-      setUser(userData);
+  const loadUser = () => {
+    const auth = localStorage.getItem("fnb_auth");
+    if (auth) {
+      const authData = JSON.parse(auth);
+      const loginTime = new Date(authData.loginTime);
+      const now = new Date();
+      const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+      
+      if (hoursDiff < 24) {
+        setUser(authData);
+      } else {
+        localStorage.removeItem("fnb_auth");
+        setUser(null);
+      }
     }
   };
 
   const handleLogout = () => {
-    base44.auth.logout();
+    localStorage.removeItem("fnb_auth");
+    navigate(createPageUrl("Painel"));
   };
 
-  // Hide layout on specific pages if needed
-  if (currentPageName === "Login") {
+  // Hide layout on login page
+  if (currentPageName === "Painel") {
     return <>{children}</>;
   }
 
@@ -142,25 +150,25 @@ export default function Layout({ children, currentPageName }) {
 
             {/* User Menu */}
             <div className="flex items-center gap-3">
-              {user && (
+              {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" className="flex items-center gap-2">
                       <div className="w-8 h-8 bg-gradient-to-br from-slate-200 to-slate-300 rounded-full flex items-center justify-center">
                         <span className="text-sm font-semibold text-slate-700">
-                          {user.full_name?.[0]?.toUpperCase() || user.email?.[0]?.toUpperCase()}
+                          {user.fullName?.[0]?.toUpperCase() || user.user?.[0]?.toUpperCase()}
                         </span>
                       </div>
                       <span className="hidden sm:inline text-sm font-medium text-slate-700">
-                        {user.full_name || user.email}
+                        {user.fullName || user.user}
                       </span>
                       <ChevronDown className="w-4 h-4 text-slate-400" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
                     <div className="px-3 py-2">
-                      <p className="text-sm font-medium text-slate-900">{user.full_name}</p>
-                      <p className="text-xs text-slate-500">{user.email}</p>
+                      <p className="text-sm font-medium text-slate-900">{user.fullName || user.user}</p>
+                      <p className="text-xs text-slate-500 capitalize">{user.role}</p>
                     </div>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
@@ -176,6 +184,14 @@ export default function Layout({ children, currentPageName }) {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate(createPageUrl("Painel"))}
+                >
+                  Entrar
+                </Button>
               )}
             </div>
           </div>
