@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { createPageUrl } from "@/utils";
 import { base44 } from "@/api/base44Client";
 import { motion } from "framer-motion";
 import { format } from "date-fns";
@@ -25,6 +27,15 @@ const roleConfig = {
 };
 
 export default function Team() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const auth = localStorage.getItem("fnb_auth");
+    if (!auth) {
+      navigate(createPageUrl("Painel"));
+    }
+  }, [navigate]);
+
   const { data: users = [], isLoading } = useQuery({
     queryKey: ['users'],
     queryFn: () => base44.entities.User.list('-created_date'),

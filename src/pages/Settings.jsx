@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
+import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
 import {
   Settings,
@@ -22,6 +24,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function SettingsPage() {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -35,19 +38,31 @@ export default function SettingsPage() {
   });
 
   useEffect(() => {
+    const auth = localStorage.getItem("fnb_auth");
+    if (!auth) {
+      navigate(createPageUrl("Painel"));
+      return;
+    }
     loadUser();
-  }, []);
+  }, [navigate]);
 
   const loadUser = async () => {
-    const userData = await base44.auth.me();
-    setUser(userData);
-    setFormData({
-      full_name: userData.full_name || "",
-      phone: userData.phone || "",
-      department: userData.department || "",
-      bio: userData.bio || "",
-      avatar_url: userData.avatar_url || "",
-    });
+    const auth = localStorage.getItem("fnb_auth");
+    if (auth) {
+      const authData = JSON.parse(auth);
+      setUser({
+        fullName: authData.fullName || authData.user,
+        email: authData.user + "@folhanewsbrasil.com.br",
+        role: authData.role,
+      });
+      setFormData({
+        full_name: authData.fullName || "",
+        phone: "",
+        department: "",
+        bio: "",
+        avatar_url: "",
+      });
+    }
     setIsLoading(false);
   };
 
@@ -63,7 +78,13 @@ export default function SettingsPage() {
 
   const handleSave = async () => {
     setIsSaving(true);
-    await base44.auth.updateMe(formData);
+    // Atualiza no localStorage
+    const auth = localStorage.getItem("fnb_auth");
+    if (auth) {
+      const authData = JSON.parse(auth);
+      authData.fullName = formData.full_name;
+      localStorage.setItem("fnb_auth", JSON.stringify(authData));
+    }
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
     setIsSaving(false);
@@ -142,7 +163,7 @@ export default function SettingsPage() {
                       </h3>
                       <p className="text-sm text-slate-500">{user?.email}</p>
                       <p className="text-xs text-slate-400 mt-1 capitalize">
-                        {user?.role_level || user?.role || "Usuário"}
+                        {user?.role || "Usuário"}
                       </p>
                     </div>
                   </div>

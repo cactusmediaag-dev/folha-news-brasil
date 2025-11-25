@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { createPageUrl } from "@/utils";
 import { base44 } from "@/api/base44Client";
 import { motion } from "framer-motion";
 import {
@@ -36,9 +38,17 @@ const services = [
 ];
 
 export default function WebPush() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("fnb_auth");
+    if (!auth) {
+      navigate(createPageUrl("Painel"));
+    }
+  }, [navigate]);
   
   const { data: configs = [], isLoading } = useQuery({
     queryKey: ['webpush'],

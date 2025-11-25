@@ -62,6 +62,13 @@ export default function PostEditor() {
   const editId = urlParams.get("id");
 
   const [isLoading, setIsLoading] = useState(!!editId);
+  
+  useEffect(() => {
+    const auth = localStorage.getItem("fnb_auth");
+    if (!auth) {
+      navigate(createPageUrl("Painel"));
+    }
+  }, [navigate]);
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [post, setPost] = useState({

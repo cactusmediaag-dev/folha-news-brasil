@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { createPageUrl } from "@/utils";
@@ -69,11 +69,19 @@ const categoryLabels = {
 };
 
 export default function Posts() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [deleteId, setDeleteId] = useState(null);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("fnb_auth");
+    if (!auth) {
+      navigate(createPageUrl("Painel"));
+    }
+  }, [navigate]);
 
   const { data: posts = [], isLoading } = useQuery({
     queryKey: ['posts'],

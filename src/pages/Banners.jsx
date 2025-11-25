@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { motion, AnimatePresence } from "framer-motion";
@@ -65,8 +66,16 @@ const positions = [
 const positionLabels = positions.reduce((acc, p) => ({ ...acc, [p.value]: p.label }), {});
 
 export default function Banners() {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("fnb_auth");
+    if (!auth) {
+      navigate(createPageUrl("Painel"));
+    }
+  }, [navigate]);
   const [editingBanner, setEditingBanner] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
