@@ -8,6 +8,7 @@ import HomeConfig from './pages/HomeConfig';
 import Settings from './pages/Settings';
 import Painel from './pages/Painel';
 import Home from './pages/Home';
+import Noticia from './pages/Noticia';
 import __Layout from './Layout.jsx';
 
 
@@ -22,10 +23,11 @@ export const PAGES = {
     "Settings": Settings,
     "Painel": Painel,
     "Home": Home,
+    "Noticia": Noticia,
 }
 
 export const pagesConfig = {
-    mainPage: "Home",
+    mainPage: "Dashboard",
     Pages: PAGES,
     Layout: __Layout,
 };
