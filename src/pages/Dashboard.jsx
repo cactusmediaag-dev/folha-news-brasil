@@ -10,7 +10,8 @@ import {
   Eye, 
   Image,
   TrendingUp,
-  Users
+  Users,
+  Loader2
 } from "lucide-react";
 
 import StatsCard from "@/components/dashboard/StatsCard";
@@ -21,14 +22,28 @@ import RecentPosts from "@/components/dashboard/RecentPosts";
 export default function Dashboard() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
     const auth = localStorage.getItem("fnb_auth");
     if (!auth) {
-      navigate(createPageUrl("Login"));
+      navigate(createPageUrl("Painel"));
       return;
     }
-    setUser(JSON.parse(auth));
+    
+    const authData = JSON.parse(auth);
+    const loginTime = new Date(authData.loginTime);
+    const now = new Date();
+    const hoursDiff = (now - loginTime) / (1000 * 60 * 60);
+    
+    if (hoursDiff >= 24) {
+      localStorage.removeItem("fnb_auth");
+      navigate(createPageUrl("Painel"));
+      return;
+    }
+    
+    setUser(authData);
+    setCheckingAuth(false);
   }, [navigate]);
 
   const { data: posts = [], isLoading: postsLoading } = useQuery({
@@ -46,7 +61,13 @@ export default function Dashboard() {
   const totalViews = posts.reduce((acc, p) => acc + (p.views_count || 0), 0);
   const activeBanners = banners.filter(b => b.is_active);
 
-  if (!user) return null;
+  if (checkingAuth || !user) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-slate-400" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -71,7 +92,7 @@ export default function Dashboard() {
               <button
                 onClick={() => {
                   localStorage.removeItem("fnb_auth");
-                  navigate(createPageUrl("Login"));
+                  navigate(createPageUrl("Painel"));
                 }}
                 className="text-sm text-slate-500 hover:text-slate-700 font-medium"
               >

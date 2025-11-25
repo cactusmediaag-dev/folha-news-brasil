@@ -6,6 +6,7 @@ import WebPush from './pages/WebPush';
 import Team from './pages/Team';
 import HomeConfig from './pages/HomeConfig';
 import Settings from './pages/Settings';
+import Painel from './pages/Painel';
 import __Layout from './Layout.jsx';
 
 
@@ -18,6 +19,7 @@ export const PAGES = {
     "Team": Team,
     "HomeConfig": HomeConfig,
     "Settings": Settings,
+    "Painel": Painel,
 }
 
 export const pagesConfig = {
