@@ -62,8 +62,8 @@ export default function Layout({ children, currentPageName }) {
     navigate(createPageUrl("Painel"));
   };
 
-  // Hide layout on login page
-  if (currentPageName === "Painel") {
+  // Hide layout on login page and public home
+  if (currentPageName === "Painel" || currentPageName === "Home") {
     return <>{children}</>;
   }
 

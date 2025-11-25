@@ -7,6 +7,7 @@ import Team from './pages/Team';
 import HomeConfig from './pages/HomeConfig';
 import Settings from './pages/Settings';
 import Painel from './pages/Painel';
+import Home from './pages/Home';
 import __Layout from './Layout.jsx';
 
 
@@ -20,6 +21,7 @@ export const PAGES = {
     "HomeConfig": HomeConfig,
     "Settings": Settings,
     "Painel": Painel,
+    "Home": Home,
 }
 
 export const pagesConfig = {
