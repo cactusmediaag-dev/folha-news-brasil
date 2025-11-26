@@ -4,8 +4,11 @@ export default function ArticleFeaturedImage({ src, alt, caption }) {
   if (!src) return null;
 
   return (
-    <figure className="max-w-[900px] mx-auto px-4 mb-8">
-      <div className="rounded-lg overflow-hidden shadow-lg" style={{ aspectRatio: '16/9' }}>
+    <figure className="max-w-[1140px] mx-auto px-4 mb-10">
+      <div 
+        className="rounded-xl overflow-hidden shadow-lg" 
+        style={{ aspectRatio: '16/9' }}
+      >
         <img
           src={src}
           alt={alt}
@@ -14,7 +17,7 @@ export default function ArticleFeaturedImage({ src, alt, caption }) {
         />
       </div>
       {caption && (
-        <figcaption className="mt-3 text-sm text-gray-500 text-center italic">
+        <figcaption className="mt-3 text-sm text-gray-500 italic">
           {caption}
         </figcaption>
       )}

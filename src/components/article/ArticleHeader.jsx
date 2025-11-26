@@ -1,7 +1,7 @@
 import React from "react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Eye, Clock, Facebook, Twitter, Share2 } from "lucide-react";
+import { Eye, Clock, Facebook, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // WhatsApp icon component
@@ -40,70 +40,82 @@ export default function ArticleHeader({ post }) {
   };
 
   return (
-    <header className="max-w-[800px] mx-auto px-4 py-8 sm:py-12 text-center">
-      {/* Title */}
-      <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-bold text-[#222222] leading-tight mb-4">
+    <header className="max-w-[1140px] mx-auto px-4 py-10 sm:py-14">
+      {/* Title - Impactful */}
+      <h1 
+        className="text-3xl sm:text-4xl lg:text-[3rem] font-extrabold text-[#1A1A1A] leading-[1.15] mb-6"
+        style={{ fontWeight: 800 }}
+      >
         {post.title}
       </h1>
 
-      {/* Subtitle */}
+      {/* Subtitle / Lead */}
       {post.subtitle && (
-        <p className="text-base sm:text-lg text-[#666666] leading-relaxed mb-5" style={{ marginBottom: '20px' }}>
+        <p 
+          className="text-lg sm:text-xl lg:text-[1.3rem] leading-relaxed mb-8"
+          style={{ color: '#4A5568' }}
+        >
           {post.subtitle}
         </p>
       )}
 
-      {/* Social Share Buttons */}
-      <div className="flex items-center justify-center gap-3 mb-6">
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={shareOnWhatsApp}
-          className="w-10 h-10 rounded-lg border-gray-300 hover:bg-green-500 hover:border-green-500 hover:text-white transition-all"
+      {/* Author & Date Info */}
+      <div className="flex flex-wrap items-center gap-4 mb-6 text-sm sm:text-base">
+        {post.author_name && (
+          <span className="font-semibold text-[#1A1A1A]">
+            Por {post.author_name}
+          </span>
+        )}
+        <time 
+          dateTime={post.publish_date || post.created_date} 
+          className="text-gray-500"
         >
-          <WhatsAppIcon className="w-5 h-5" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={shareOnFacebook}
-          className="w-10 h-10 rounded-lg border-gray-300 hover:bg-blue-600 hover:border-blue-600 hover:text-white transition-all"
-        >
-          <Facebook className="w-5 h-5" />
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={shareOnTwitter}
-          className="w-10 h-10 rounded-lg border-gray-300 hover:bg-sky-500 hover:border-sky-500 hover:text-white transition-all"
-        >
-          <Twitter className="w-5 h-5" />
-        </Button>
+          {format(new Date(post.publish_date || post.created_date), "dd 'de' MMMM 'de' yyyy 'às' HH:mm", { locale: ptBR })}
+        </time>
       </div>
 
-      {/* Author Info */}
-      <div className="mb-4 text-sm">
-        <p className="text-[#333333]">
-          {post.author_name && (
-            <span className="font-semibold">Por {post.author_name}</span>
-          )}
-          {post.author_name && " - "}
-          <time dateTime={post.publish_date || post.created_date} className="text-gray-500">
-            {format(new Date(post.publish_date || post.created_date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
-          </time>
-        </p>
-      </div>
+      {/* Stats & Share Row */}
+      <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-t border-b border-gray-200">
+        {/* Stats Badges */}
+        <div className="flex items-center gap-3">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-sm text-gray-600">
+            <Eye className="w-4 h-4" />
+            {(post.views_count || 0).toLocaleString()} views
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-sm text-gray-600">
+            <Clock className="w-4 h-4" />
+            {readingTime} min de leitura
+          </span>
+        </div>
 
-      {/* Stats Badges */}
-      <div className="flex items-center justify-center gap-3">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-sm text-gray-600">
-          <Eye className="w-4 h-4" />
-          {(post.views_count || 0).toLocaleString()} Views
-        </span>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-sm text-gray-600">
-          <Clock className="w-4 h-4" />
-          {readingTime} Min Leitura
-        </span>
+        {/* Social Share Buttons */}
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-gray-500 mr-1">Compartilhar:</span>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={shareOnWhatsApp}
+            className="w-9 h-9 rounded-full border-gray-300 hover:bg-green-500 hover:border-green-500 hover:text-white transition-all"
+          >
+            <WhatsAppIcon className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={shareOnFacebook}
+            className="w-9 h-9 rounded-full border-gray-300 hover:bg-blue-600 hover:border-blue-600 hover:text-white transition-all"
+          >
+            <Facebook className="w-4 h-4" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={shareOnTwitter}
+            className="w-9 h-9 rounded-full border-gray-300 hover:bg-sky-500 hover:border-sky-500 hover:text-white transition-all"
+          >
+            <Twitter className="w-4 h-4" />
+          </Button>
+        </div>
       </div>
     </header>
   );
