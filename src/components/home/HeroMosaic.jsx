@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -19,11 +18,20 @@ const categoryLabels = {
   local: "Local",
 };
 
-export default function HeroMosaic({ posts = [], isLoading = false }) {
-  // Debug log
-  console.log('HeroMosaic - Total posts received:', posts.length);
-  console.log('HeroMosaic - Featured posts:', posts.filter(p => p.is_featured).map(p => p.title));
+const categoryColors = {
+  politica: "#D71E1F",
+  economia: "#2563eb",
+  esportes: "#16a34a",
+  entretenimento: "#9333ea",
+  tecnologia: "#0891b2",
+  saude: "#dc2626",
+  educacao: "#ca8a04",
+  mundo: "#4f46e5",
+  brasil: "#15803d",
+  local: "#ea580c",
+};
 
+export default function HeroMosaic({ posts = [], isLoading = false }) {
   // Filter featured posts first, then sort by date
   const featuredPosts = posts
     .filter(p => p.is_featured === true)
@@ -38,114 +46,272 @@ export default function HeroMosaic({ posts = [], isLoading = false }) {
     ? featuredPosts.slice(0, 3)
     : [...featuredPosts, ...regularPosts].slice(0, 3);
 
-  console.log('HeroMosaic - Display posts:', displayPosts.map(p => ({ title: p.title, featured: p.is_featured })));
-
-  const mainPost = displayPosts[0];
-  const sidePosts = displayPosts.slice(1, 3);
-
-  // Loading skeleton - show while loading OR when we don't have enough posts yet
+  // Loading skeleton
   if (isLoading || displayPosts.length < 3) {
     return (
-      <section className="py-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="hero-mosaic-grid">
-            <div className="main-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center animate-pulse">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-4"></div>
-                <p className="text-gray-500 font-semibold">Carregando destaques...</p>
-              </div>
-            </div>
-            <div className="side-posts">
-              <div className="side-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl animate-pulse"></div>
-              <div className="side-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl animate-pulse"></div>
-            </div>
+      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 16px' }}>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '2fr 1fr',
+          gap: '20px',
+          height: '500px',
+          width: '100%'
+        }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%)',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <p style={{ color: '#6b7280', fontWeight: 600 }}>Carregando destaques...</p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', height: '100%' }}>
+            <div style={{ flex: 1, background: 'linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%)', borderRadius: '12px' }}></div>
+            <div style={{ flex: 1, background: 'linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%)', borderRadius: '12px' }}></div>
           </div>
         </div>
       </section>
     );
   }
 
+  const mainPost = displayPosts[0];
+  const sidePost1 = displayPosts[1];
+  const sidePost2 = displayPosts[2];
+
   return (
-    <section className="py-6 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="hero-mosaic-grid">
-          {/* Main News - Left Column */}
-          <Link 
-            to={`${createPageUrl("Noticia")}?slug=${mainPost.slug}`}
-            className="main-post relative rounded-xl overflow-hidden group"
+    <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 16px' }}>
+      {/* CSS Grid Container */}
+      <div className="mosaic-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: '2fr 1fr',
+        gap: '20px',
+        height: '500px',
+        width: '100%'
+      }}>
+        
+        {/* Card Principal (Esquerda - Grande) */}
+        <Link
+          to={`${createPageUrl("Noticia")}?slug=${mainPost.slug}`}
+          className="mosaic-main-card"
+          style={{
+            position: 'relative',
+            height: '100%',
+            width: '100%',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            backgroundImage: `url(${mainPost.featured_image || 'https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1200&h=800&fit=crop'})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            display: 'block'
+          }}
+        >
+          {/* Scrim Overlay */}
+          <div style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            height: '70%',
+            background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)',
+            zIndex: 1
+          }}></div>
+          
+          {/* Content */}
+          <div style={{
+            position: 'absolute',
+            bottom: '24px',
+            left: '24px',
+            right: '24px',
+            zIndex: 2,
+            color: 'white'
+          }}>
+            <span style={{
+              display: 'inline-block',
+              backgroundColor: categoryColors[mainPost.category] || '#D71E1F',
+              color: 'white',
+              padding: '4px 12px',
+              borderRadius: '4px',
+              fontSize: '12px',
+              fontWeight: 600,
+              marginBottom: '12px',
+              textTransform: 'uppercase'
+            }}>
+              {categoryLabels[mainPost.category] || mainPost.category}
+            </span>
+            <h1 style={{
+              fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
+              fontWeight: 700,
+              lineHeight: 1.2,
+              marginBottom: '12px',
+              textShadow: '0 2px 4px rgba(0,0,0,0.5)'
+            }}>
+              {mainPost.title}
+            </h1>
+            {mainPost.subtitle && (
+              <p style={{
+                fontSize: '1rem',
+                opacity: 0.9,
+                marginBottom: '12px',
+                lineHeight: 1.4
+              }}>
+                {mainPost.subtitle}
+              </p>
+            )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '14px', opacity: 0.8 }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <Clock style={{ width: '16px', height: '16px' }} />
+                {format(new Date(mainPost.publish_date || mainPost.created_date), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}
+              </span>
+              {mainPost.author_name && <span>Por {mainPost.author_name}</span>}
+            </div>
+          </div>
+        </Link>
+
+        {/* Coluna Direita (Flex Column) */}
+        <div className="mosaic-side-column" style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+          height: '100%'
+        }}>
+          
+          {/* Card Topo Direita */}
+          <Link
+            to={`${createPageUrl("Noticia")}?slug=${sidePost1.slug}`}
+            className="mosaic-side-card"
+            style={{
+              position: 'relative',
+              flex: 1,
+              width: '100%',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              backgroundImage: `url(${sidePost1.featured_image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=400&fit=crop'})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              display: 'block'
+            }}
           >
-            <img
-              src={mainPost.featured_image || "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1200&h=800&fit=crop"}
-              alt={mainPost.title}
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="eager"
-            />
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-            
-            {/* Content */}
-            <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end z-10">
-              <Badge className="w-fit bg-[#D71E1F] hover:bg-[#b91c1c] text-white mb-3 font-semibold">
-                {categoryLabels[mainPost.category] || mainPost.category}
-              </Badge>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-3 line-clamp-3 drop-shadow-lg">
-                {mainPost.title}
-              </h1>
-              {mainPost.subtitle && (
-                <p className="text-white/90 text-sm sm:text-base line-clamp-2 mb-3 font-normal">
-                  {mainPost.subtitle}
-                </p>
-              )}
-              <div className="flex items-center gap-4 text-white/80 text-sm font-normal">
-                <span className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
-                  {format(new Date(mainPost.publish_date || mainPost.created_date), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}
-                </span>
-                {mainPost.author_name && (
-                  <span>Por {mainPost.author_name}</span>
-                )}
-              </div>
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: '100%',
+              height: '70%',
+              background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)',
+              zIndex: 1
+            }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '16px',
+              left: '16px',
+              right: '16px',
+              zIndex: 2,
+              color: 'white'
+            }}>
+              <span style={{
+                display: 'inline-block',
+                backgroundColor: categoryColors[sidePost1.category] || '#D71E1F',
+                color: 'white',
+                padding: '3px 10px',
+                borderRadius: '4px',
+                fontSize: '11px',
+                fontWeight: 600,
+                marginBottom: '8px',
+                textTransform: 'uppercase'
+              }}>
+                {categoryLabels[sidePost1.category] || sidePost1.category}
+              </span>
+              <h3 style={{
+                fontSize: '1rem',
+                fontWeight: 700,
+                lineHeight: 1.3,
+                textShadow: '0 2px 4px rgba(0,0,0,0.5)'
+              }}>
+                {sidePost1.title}
+              </h3>
             </div>
           </Link>
 
-          {/* Side News - Right Column */}
-          <div className="side-posts">
-            {sidePosts.length > 0 ? (
-              sidePosts.map((post) => (
-                <Link
-                  key={post.id}
-                  to={`${createPageUrl("Noticia")}?slug=${post.slug}`}
-                  className="side-post relative rounded-xl overflow-hidden group"
-                >
-                  <img
-                    src={post.featured_image || "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=400&fit=crop"}
-                    alt={post.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="eager"
-                  />
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-                  
-                  {/* Content */}
-                  <div className="absolute inset-0 p-4 flex flex-col justify-end z-10">
-                    <Badge className="w-fit bg-[#D71E1F] hover:bg-[#b91c1c] text-white mb-2 text-xs font-semibold">
-                      {categoryLabels[post.category] || post.category}
-                    </Badge>
-                    <h3 className="text-base sm:text-lg font-bold text-white leading-tight line-clamp-2 drop-shadow-lg">
-                      {post.title}
-                    </h3>
-                  </div>
-                </Link>
-              ))
-            ) : (
-              <>
-                <div className="side-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl"></div>
-                <div className="side-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl"></div>
-              </>
-            )}
-          </div>
+          {/* Card Baixo Direita */}
+          <Link
+            to={`${createPageUrl("Noticia")}?slug=${sidePost2.slug}`}
+            className="mosaic-side-card"
+            style={{
+              position: 'relative',
+              flex: 1,
+              width: '100%',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              backgroundImage: `url(${sidePost2.featured_image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=400&fit=crop'})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              display: 'block'
+            }}
+          >
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: '100%',
+              height: '70%',
+              background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%)',
+              zIndex: 1
+            }}></div>
+            <div style={{
+              position: 'absolute',
+              bottom: '16px',
+              left: '16px',
+              right: '16px',
+              zIndex: 2,
+              color: 'white'
+            }}>
+              <span style={{
+                display: 'inline-block',
+                backgroundColor: categoryColors[sidePost2.category] || '#D71E1F',
+                color: 'white',
+                padding: '3px 10px',
+                borderRadius: '4px',
+                fontSize: '11px',
+                fontWeight: 600,
+                marginBottom: '8px',
+                textTransform: 'uppercase'
+              }}>
+                {categoryLabels[sidePost2.category] || sidePost2.category}
+              </span>
+              <h3 style={{
+                fontSize: '1rem',
+                fontWeight: 700,
+                lineHeight: 1.3,
+                textShadow: '0 2px 4px rgba(0,0,0,0.5)'
+              }}>
+                {sidePost2.title}
+              </h3>
+            </div>
+          </Link>
+
         </div>
       </div>
+
+      {/* Responsive CSS */}
+      <style>{`
+        @media (max-width: 768px) {
+          .mosaic-grid {
+            grid-template-columns: 1fr !important;
+            height: auto !important;
+          }
+          .mosaic-main-card {
+            height: 300px !important;
+          }
+          .mosaic-side-column {
+            height: auto !important;
+          }
+          .mosaic-side-card {
+            height: 200px !important;
+            flex: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
