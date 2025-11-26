@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
 import { createPageUrl } from "@/utils";
 import { motion } from "framer-motion";
@@ -34,18 +34,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
 
-const categories = [
-  { value: "politica", label: "Política" },
-  { value: "economia", label: "Economia" },
-  { value: "esportes", label: "Esportes" },
-  { value: "entretenimento", label: "Entretenimento" },
-  { value: "tecnologia", label: "Tecnologia" },
-  { value: "saude", label: "Saúde" },
-  { value: "educacao", label: "Educação" },
-  { value: "mundo", label: "Mundo" },
-  { value: "brasil", label: "Brasil" },
-  { value: "local", label: "Local" },
-];
+import { CATEGORIES_LIST } from "@/components/shared/CategoryColors";
 
 const generateSlug = (title) => {
   return title
@@ -83,6 +72,7 @@ export default function PostEditor() {
     slug: "",
     body: "",
     category: "",
+    subcategory: "",
     featured_image: "",
     video_url: "",
     status: "draft",
@@ -93,6 +83,26 @@ export default function PostEditor() {
     keywords: "",
     is_featured: false,
   });
+  const [subcategorySuggestions, setSubcategorySuggestions] = useState([]);
+  const [showSubcategorySuggestions, setShowSubcategorySuggestions] = useState(false);
+
+  // Fetch existing subcategories for autocomplete
+  const { data: existingPosts = [] } = useQuery({
+    queryKey: ['posts-subcategories', post.category],
+    queryFn: () => base44.entities.Post.filter({ category: post.category }),
+    enabled: !!post.category,
+  });
+
+  useEffect(() => {
+    if (existingPosts.length > 0 && post.category) {
+      const uniqueSubcats = [...new Set(
+        existingPosts
+          .filter(p => p.subcategory)
+          .map(p => p.subcategory)
+      )];
+      setSubcategorySuggestions(uniqueSubcats);
+    }
+  }, [existingPosts, post.category]);
 
   useEffect(() => {
     if (editId) {
@@ -649,19 +659,53 @@ Retorne APENAS os dados encontrados. Se não encontrar algum campo, retorne stri
                     <Label className="text-sm font-medium text-slate-700">Categoria</Label>
                     <Select
                       value={post.category}
-                      onValueChange={(value) => setPost({ ...post, category: value })}
+                      onValueChange={(value) => setPost({ ...post, category: value, subcategory: "" })}
                     >
                       <SelectTrigger className="mt-2 bg-slate-50">
                         <SelectValue placeholder="Selecione..." />
                       </SelectTrigger>
                       <SelectContent>
-                        {categories.map(cat => (
+                        {CATEGORIES_LIST.map(cat => (
                           <SelectItem key={cat.value} value={cat.value}>
                             {cat.label}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
+                  </div>
+
+                  <div className="relative">
+                    <Label className="text-sm font-medium text-slate-700">Subcategoria (Opcional)</Label>
+                    <Input
+                      placeholder="Ex: Futebol, Rock, Tecnologia..."
+                      value={post.subcategory || ""}
+                      onChange={(e) => {
+                        setPost({ ...post, subcategory: e.target.value });
+                        setShowSubcategorySuggestions(true);
+                      }}
+                      onFocus={() => setShowSubcategorySuggestions(true)}
+                      onBlur={() => setTimeout(() => setShowSubcategorySuggestions(false), 200)}
+                      className="mt-2 bg-slate-50 border-slate-200 focus:bg-white"
+                    />
+                    {showSubcategorySuggestions && subcategorySuggestions.length > 0 && post.category && (
+                      <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-40 overflow-y-auto">
+                        {subcategorySuggestions
+                          .filter(s => s.toLowerCase().includes((post.subcategory || "").toLowerCase()))
+                          .map((suggestion, idx) => (
+                            <button
+                              key={idx}
+                              type="button"
+                              className="w-full px-3 py-2 text-left text-sm hover:bg-slate-100 transition-colors"
+                              onClick={() => {
+                                setPost({ ...post, subcategory: suggestion });
+                                setShowSubcategorySuggestions(false);
+                              }}
+                            >
+                              {suggestion}
+                            </button>
+                          ))}
+                      </div>
+                    )}
                   </div>
 
                   <div>
