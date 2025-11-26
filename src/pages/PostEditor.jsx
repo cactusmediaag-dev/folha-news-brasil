@@ -256,23 +256,109 @@ export default function PostEditor() {
                   <CardTitle className="text-base font-semibold">Conteúdo</CardTitle>
                 </CardHeader>
                 <CardContent className="p-0">
-                  <ReactQuill
-                    theme="snow"
-                    value={post.body}
-                    onChange={(value) => setPost({ ...post, body: value })}
-                    className="border-0"
-                    style={{ minHeight: "400px" }}
-                    modules={{
-                      toolbar: [
-                        [{ header: [1, 2, 3, false] }],
-                        ["bold", "italic", "underline", "strike"],
-                        [{ list: "ordered" }, { list: "bullet" }],
-                        ["blockquote", "code-block"],
-                        ["link", "image"],
-                        ["clean"],
-                      ],
-                    }}
-                  />
+                  <style>{`
+                    .quill-editor-wrapper .ql-container {
+                      font-family: 'Titillium Web', sans-serif !important;
+                      font-size: 16px;
+                      border: none !important;
+                      border-top: 1px solid #E2E8F0 !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar {
+                      font-family: 'Titillium Web', sans-serif !important;
+                      border: none !important;
+                      border-bottom: 1px solid #E2E8F0 !important;
+                      background: #F8FAFC;
+                      padding: 12px !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar button {
+                      width: 28px !important;
+                      height: 28px !important;
+                      padding: 4px !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar button svg {
+                      width: 16px !important;
+                      height: 16px !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar .ql-picker {
+                      height: 28px !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar .ql-picker-label {
+                      padding: 4px 8px !important;
+                    }
+                    .quill-editor-wrapper .ql-editor {
+                      min-height: 400px;
+                      padding: 20px !important;
+                      background: white;
+                      line-height: 1.7;
+                    }
+                    .quill-editor-wrapper .ql-editor.ql-blank::before {
+                      font-style: normal;
+                      color: #94A3B8;
+                      left: 20px;
+                    }
+                    .quill-editor-wrapper .ql-editor p {
+                      margin-bottom: 1em;
+                    }
+                    .quill-editor-wrapper .ql-editor h2 {
+                      font-size: 1.5em;
+                      font-weight: 700;
+                      margin: 1.5em 0 0.5em;
+                    }
+                    .quill-editor-wrapper .ql-editor h3 {
+                      font-size: 1.25em;
+                      font-weight: 600;
+                      margin: 1.2em 0 0.4em;
+                    }
+                    .quill-editor-wrapper .ql-editor blockquote {
+                      border-left: 4px solid #D71E1F;
+                      padding-left: 16px;
+                      margin: 1em 0;
+                      color: #64748B;
+                      font-style: italic;
+                    }
+                    .quill-editor-wrapper .ql-snow .ql-stroke {
+                      stroke: #475569 !important;
+                    }
+                    .quill-editor-wrapper .ql-snow .ql-fill {
+                      fill: #475569 !important;
+                    }
+                    .quill-editor-wrapper .ql-snow button:hover .ql-stroke {
+                      stroke: #D71E1F !important;
+                    }
+                    .quill-editor-wrapper .ql-snow button:hover .ql-fill {
+                      fill: #D71E1F !important;
+                    }
+                    .quill-editor-wrapper .ql-snow button.ql-active .ql-stroke {
+                      stroke: #D71E1F !important;
+                    }
+                    .quill-editor-wrapper .ql-snow button.ql-active .ql-fill {
+                      fill: #D71E1F !important;
+                    }
+                  `}</style>
+                  <div className="quill-editor-wrapper">
+                    <ReactQuill
+                      theme="snow"
+                      value={post.body}
+                      onChange={(value) => setPost({ ...post, body: value })}
+                      placeholder="Escreva sua notícia aqui..."
+                      modules={{
+                        toolbar: [
+                          [{ header: [2, 3, false] }],
+                          ["bold", "italic", "underline"],
+                          [{ list: "ordered" }, { list: "bullet" }],
+                          ["blockquote", "link"],
+                          ["image"],
+                          ["clean"],
+                        ],
+                      }}
+                      formats={[
+                        "header",
+                        "bold", "italic", "underline",
+                        "list", "bullet",
+                        "blockquote", "link", "image"
+                      ]}
+                    />
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
