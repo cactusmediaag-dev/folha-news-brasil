@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;600;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,10 +6,12 @@
 
 :root {
   /* Folha News Brasil - Design System */
+  --font-primary: 'Overpass', sans-serif;
   --primary-color: #D71E1F;
   --secondary-color: #DADADA;
-  --text-dark: #1A1A1A;
-  --text-body: #333333;
+  --text-primary: #1A1A1A;
+  --text-body: #2D3748;
+  --text-muted: #718096;
   --white: #FFFFFF;
   
   /* Shadcn variables */
@@ -35,34 +37,46 @@
   --radius: 0.5rem;
 }
 
-/* Force Titillium Web on ALL elements */
+/* Force Overpass on ALL elements */
 *, *::before, *::after {
-  font-family: 'Titillium Web', sans-serif !important;
+  font-family: var(--font-primary) !important;
 }
 
 html, body {
-  font-family: 'Titillium Web', sans-serif !important;
+  font-family: var(--font-primary) !important;
   color: var(--text-body);
   background-color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Headlines - Epic Look */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Titillium Web', sans-serif !important;
+  font-family: var(--font-primary) !important;
   font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
+h1 {
+  font-weight: 900;
+}
+
+/* Body text */
 p, span, a, li {
-  font-family: 'Titillium Web', sans-serif !important;
+  font-family: var(--font-primary) !important;
   font-weight: 400;
 }
 
-button, input, textarea, select {
-  font-family: 'Titillium Web', sans-serif !important;
+/* Buttons */
+button {
+  font-family: var(--font-primary) !important;
+  font-weight: 600;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--text-dark);
-  font-weight: 700;
+input, textarea, select {
+  font-family: var(--font-primary) !important;
 }
 
 /* Custom scrollbar */
