@@ -4,7 +4,7 @@ export default function ArticleBody({ content }) {
   if (!content) return null;
 
   return (
-    <div className="max-w-[740px] mx-auto px-4 mb-12">
+    <div className="max-w-[800px] mx-auto px-4 mb-12">
       <div 
         className="article-content prose prose-lg max-w-none
           prose-headings:font-bold prose-headings:text-[#1A1A1A]
@@ -30,8 +30,8 @@ export default function ArticleBody({ content }) {
       <style>{`
         .article-content {
           font-family: 'Titillium Web', sans-serif;
-          font-size: 1.125rem;
-          line-height: 1.75;
+          font-size: 18px;
+          line-height: 1.6;
           color: #333333;
         }
         
