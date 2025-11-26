@@ -293,8 +293,26 @@ export default function HeroMosaic({ posts = [], isLoading = false }) {
         </div>
       </div>
 
-      {/* Responsive CSS */}
+      {/* Responsive CSS + Hover Effects */}
       <style>{`
+        .mosaic-main-card, .mosaic-side-card {
+          transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, filter 0.3s ease;
+          cursor: pointer;
+        }
+        
+        .mosaic-main-card:hover, .mosaic-side-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+          filter: brightness(1.05);
+          z-index: 10;
+        }
+        
+        .mosaic-main-card:hover h1, .mosaic-side-card:hover h3 {
+          text-decoration: underline;
+          text-decoration-color: #D71E1F;
+          text-underline-offset: 4px;
+        }
+        
         @media (max-width: 768px) {
           .mosaic-grid {
             grid-template-columns: 1fr !important;
