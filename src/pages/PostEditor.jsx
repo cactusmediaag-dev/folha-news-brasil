@@ -14,6 +14,8 @@ import {
   Eye,
   Loader2,
   Check,
+  Link as LinkIcon,
+  Sparkles,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -30,6 +32,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/components/ui/use-toast";
 
 const categories = [
   { value: "politica", label: "Política" },
@@ -58,10 +61,13 @@ const generateSlug = (title) => {
 export default function PostEditor() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const urlParams = new URLSearchParams(window.location.search);
   const editId = urlParams.get("id");
 
   const [isLoading, setIsLoading] = useState(!!editId);
+  const [importUrl, setImportUrl] = useState("");
+  const [isImporting, setIsImporting] = useState(false);
   
   useEffect(() => {
     const auth = localStorage.getItem("fnb_auth");
@@ -120,6 +126,74 @@ export default function PostEditor() {
     const { file_url } = await base44.integrations.Core.UploadFile({ file });
     setPost({ ...post, featured_image: file_url });
     setIsSaving(false);
+  };
+
+  const handleMagicImport = async () => {
+    if (!importUrl.trim()) {
+      toast({
+        title: "URL inválida",
+        description: "Por favor, cole uma URL válida.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsImporting(true);
+    
+    try {
+      const result = await base44.integrations.Core.InvokeLLM({
+        prompt: `Acesse esta URL e extraia os metadados da página: ${importUrl}
+
+Extraia as seguintes informações:
+1. O título principal da notícia/artigo (og:title ou title tag)
+2. A descrição ou subtítulo (og:description ou meta description)
+3. A URL da imagem principal (og:image)
+
+Retorne APENAS os dados encontrados. Se não encontrar algum campo, retorne string vazia.`,
+        add_context_from_internet: true,
+        response_json_schema: {
+          type: "object",
+          properties: {
+            title: { type: "string", description: "Título da notícia" },
+            description: { type: "string", description: "Descrição ou subtítulo" },
+            image: { type: "string", description: "URL da imagem principal" },
+          },
+          required: ["title", "description", "image"],
+        },
+      });
+
+      if (result.title || result.description || result.image) {
+        setPost((prev) => ({
+          ...prev,
+          title: result.title || prev.title,
+          subtitle: result.description || prev.subtitle,
+          featured_image: result.image || prev.featured_image,
+          slug: result.title ? generateSlug(result.title) : prev.slug,
+          meta_title: result.title ? result.title.substring(0, 60) : prev.meta_title,
+          meta_description: result.description ? result.description.substring(0, 160) : prev.meta_description,
+        }));
+
+        toast({
+          title: "Dados importados com sucesso!",
+          description: "Os campos foram preenchidos automaticamente.",
+        });
+        setImportUrl("");
+      } else {
+        toast({
+          title: "Nenhum dado encontrado",
+          description: "Não foi possível extrair dados desta URL. Preencha manualmente.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Erro ao importar",
+        description: "Não foi possível ler este site. Preencha manualmente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsImporting(false);
+    }
   };
 
   const handleSave = async (status = post.status) => {
@@ -205,6 +279,50 @@ export default function PostEditor() {
 
       {/* Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Magic Import Bar */}
+        {!editId && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6"
+          >
+            <Card className="border-0 shadow-lg shadow-purple-100 bg-gradient-to-r from-purple-50 to-orange-50">
+              <CardContent className="p-4">
+                <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                  <div className="flex items-center gap-2 text-purple-700">
+                    <Sparkles className="w-5 h-5" />
+                    <span className="font-semibold text-sm">Magic Import</span>
+                  </div>
+                  <div className="flex-1 flex flex-col sm:flex-row gap-2 w-full">
+                    <div className="relative flex-1">
+                      <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                      <Input
+                        placeholder="Cole o link da notícia original aqui..."
+                        value={importUrl}
+                        onChange={(e) => setImportUrl(e.target.value)}
+                        className="pl-10 bg-white border-purple-200 focus:border-purple-400 focus:ring-purple-400"
+                        onKeyDown={(e) => e.key === "Enter" && handleMagicImport()}
+                      />
+                    </div>
+                    <Button
+                      onClick={handleMagicImport}
+                      disabled={isImporting || !importUrl.trim()}
+                      className="bg-gradient-to-r from-purple-600 to-orange-500 hover:from-purple-700 hover:to-orange-600 text-white whitespace-nowrap"
+                    >
+                      {isImporting ? (
+                        <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                      ) : (
+                        <Sparkles className="w-4 h-4 mr-2" />
+                      )}
+                      Importar Dados ⚡
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Main Editor */}
           <div className="lg:col-span-2 space-y-6">
