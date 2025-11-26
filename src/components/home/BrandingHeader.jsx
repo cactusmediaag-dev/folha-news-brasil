@@ -19,19 +19,19 @@ const navItems = [
   name: "Editorias",
   dropdown: true,
   items: [
-  { name: "Política", href: "#politica" },
-  { name: "Economia", href: "#economia" },
-  { name: "Esportes", href: "#esportes" },
-  { name: "Tecnologia", href: "#tecnologia" },
-  { name: "Entretenimento", href: "#entretenimento" }]
-
+  { name: "Política", href: "/Categoria?slug=politica" },
+  { name: "Economia", href: "/Categoria?slug=economia" },
+  { name: "Esportes", href: "/Categoria?slug=esportes" },
+  { name: "Tecnologia", href: "/Categoria?slug=tecnologia" },
+  { name: "Entretenimento", href: "/Categoria?slug=entretenimento" },
+  { name: "Saúde", href: "/Categoria?slug=saude" },
+  { name: "Educação", href: "/Categoria?slug=educacao" }]
 },
-{ name: "Cidades", href: "#cidades" },
-{ name: "Policial", href: "#policial" },
-{ name: "Política", href: "#politica" },
-{ name: "Ciência", href: "#ciencia" },
-{ name: "Mundo", href: "#mundo" },
-{ name: "Capital", href: "#capital" }];
+{ name: "Cidades", href: "/Categoria?slug=cidade" },
+{ name: "Turismo", href: "/Categoria?slug=turismo" },
+{ name: "Ciência", href: "/Categoria?slug=ciencia" },
+{ name: "Mundo", href: "/Categoria?slug=mundo" },
+{ name: "Música", href: "/Categoria?slug=musica" }];
 
 
 export default function BrandingHeader() {

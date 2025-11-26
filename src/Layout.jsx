@@ -63,7 +63,7 @@ export default function Layout({ children, currentPageName }) {
   };
 
   // Hide layout on login page, public home and article page
-  if (currentPageName === "Painel" || currentPageName === "Home" || currentPageName === "Noticia") {
+  if (currentPageName === "Painel" || currentPageName === "Home" || currentPageName === "Noticia" || currentPageName === "Categoria") {
     return <>{children}</>;
   }
 
