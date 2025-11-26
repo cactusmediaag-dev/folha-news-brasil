@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Eye } from "lucide-react";
 import { format } from "date-fns";
@@ -43,8 +45,8 @@ export default function NewsFeed({ posts = [] }) {
     <div className="space-y-6">
       {feedPosts.map((post, index) => (
         <React.Fragment key={post.id}>
-          <a
-            href={`/noticia/${post.slug}`}
+          <Link
+            to={`${createPageUrl("Noticia")}?slug=${post.slug}`}
             className="block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow group"
           >
             <div className="flex flex-col sm:flex-row gap-4 p-4">
@@ -88,7 +90,7 @@ export default function NewsFeed({ posts = [] }) {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Ad Banner after 2nd post */}
           {index === 1 && (

@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
 import { Badge } from "@/components/ui/badge";
 import { Clock } from "lucide-react";
 import { format } from "date-fns";
@@ -54,8 +56,8 @@ export default function HeroMosaic({ posts = [] }) {
       <div className="max-w-7xl mx-auto px-4">
         <div className="hero-mosaic-grid">
           {/* Main News - Left Column */}
-          <a 
-            href={`/Noticia?slug=${mainPost.slug}`}
+          <Link 
+            to={`${createPageUrl("Noticia")}?slug=${mainPost.slug}`}
             className="main-post relative rounded-xl overflow-hidden group"
           >
             <img
@@ -90,15 +92,15 @@ export default function HeroMosaic({ posts = [] }) {
                 )}
               </div>
             </div>
-          </a>
+          </Link>
 
           {/* Side News - Right Column */}
           <div className="side-posts">
             {sidePosts.length > 0 ? (
               sidePosts.map((post) => (
-                <a
+                <Link
                   key={post.id}
-                  href={`/Noticia?slug=${post.slug}`}
+                  to={`${createPageUrl("Noticia")}?slug=${post.slug}`}
                   className="side-post relative rounded-xl overflow-hidden group"
                 >
                   <img
@@ -119,7 +121,7 @@ export default function HeroMosaic({ posts = [] }) {
                       {post.title}
                     </h3>
                   </div>
-                </a>
+                </Link>
               ))
             ) : (
               <>
