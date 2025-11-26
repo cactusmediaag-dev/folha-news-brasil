@@ -4,7 +4,7 @@ import { base44 } from "@/api/base44Client";
 
 import TopBar from "@/components/home/TopBar";
 import BrandingHeader from "@/components/home/BrandingHeader";
-import CategoryStories from "@/components/home/CategoryStories";
+import HeaderAdBanner from "@/components/home/HeaderAdBanner";
 import HeroMosaic from "@/components/home/HeroMosaic";
 import WebStoriesCarousel from "@/components/home/WebStoriesCarousel";
 import NewsFeed from "@/components/home/NewsFeed";
@@ -32,8 +32,8 @@ export default function Home() {
       {/* Header with Logo and Navigation */}
       <BrandingHeader />
 
-      {/* Category Stories */}
-      <CategoryStories />
+      {/* Header Ad Banner */}
+      <HeaderAdBanner />
 
       {/* Hero Mosaic */}
       <HeroMosaic posts={sortedPosts} />

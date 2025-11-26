@@ -23,13 +23,15 @@ const navItems = [
       { name: "Economia", href: "#economia" },
       { name: "Esportes", href: "#esportes" },
       { name: "Tecnologia", href: "#tecnologia" },
-      { name: "Mundo", href: "#mundo" },
       { name: "Entretenimento", href: "#entretenimento" },
     ]
   },
-  { name: "Vídeos", href: "#videos" },
-  { name: "Edições Digitais", href: "#edicoes" },
-  { name: "Contato", href: "#contato" },
+  { name: "Cidades", href: "#cidades" },
+  { name: "Policial", href: "#policial" },
+  { name: "Política", href: "#politica" },
+  { name: "Ciência", href: "#ciencia" },
+  { name: "Mundo", href: "#mundo" },
+  { name: "Capital", href: "#capital" },
 ];
 
 export default function BrandingHeader() {
@@ -38,80 +40,82 @@ export default function BrandingHeader() {
 
   return (
     <header className="bg-[#DADADA]">
-      {/* Main Header */}
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          {/* Mobile Menu */}
-          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-            <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="w-6 h-6 text-[#1A1A1A]" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-80 p-0 bg-white">
-              <div className="p-6 bg-[#D71E1F]">
-                <div className="flex items-center gap-2 text-white">
-                  <Newspaper className="w-8 h-8" />
-                  <span className="text-xl font-bold">Folha News Brasil</span>
-                </div>
-              </div>
-              <nav className="p-4">
-                {navItems.map((item) => (
-                  <div key={item.name}>
-                    {item.dropdown ? (
-                      <div className="py-3 border-b border-gray-100">
-                        <span className="font-semibold text-[#1A1A1A]">{item.name}</span>
-                        <div className="mt-2 ml-4 space-y-2">
-                          {item.items.map((subItem) => (
-                            <a
-                              key={subItem.name}
-                              href={subItem.href}
-                              className="block text-sm text-[#333333] hover:text-[#D71E1F] transition-colors"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              {subItem.name}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <a
-                        href={item.href}
-                        className="block py-3 border-b border-gray-100 font-semibold text-[#1A1A1A] hover:text-[#D71E1F] transition-colors"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </a>
-                    )}
+      {/* Main Header - 3 Column Grid Layout */}
+      <div className="max-w-7xl mx-auto px-4" style={{ paddingTop: '35px', paddingBottom: '35px' }}>
+        <div className="grid grid-cols-3 items-center">
+          {/* Column 1 - Left (Mobile Menu / Empty on Desktop) */}
+          <div className="flex items-center">
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild className="lg:hidden">
+                <Button variant="ghost" size="icon">
+                  <Menu className="w-6 h-6 text-[#1A1A1A]" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-80 p-0 bg-white">
+                <div className="p-6 bg-[#D71E1F]">
+                  <div className="flex items-center gap-2 text-white">
+                    <Newspaper className="w-8 h-8" />
+                    <span className="text-xl font-bold">Folha News Brasil</span>
                   </div>
-                ))}
-              </nav>
-            </SheetContent>
-          </Sheet>
+                </div>
+                <nav className="p-4">
+                  {navItems.map((item, index) => (
+                    <div key={`${item.name}-${index}`}>
+                      {item.dropdown ? (
+                        <div className="py-3 border-b border-gray-100">
+                          <span className="font-medium text-[#1A1A1A]">{item.name}</span>
+                          <div className="mt-2 ml-4 space-y-2">
+                            {item.items.map((subItem) => (
+                              <a
+                                key={subItem.name}
+                                href={subItem.href}
+                                className="block text-sm text-[#333333] hover:text-[#D71E1F] transition-colors font-light"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                {subItem.name}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <a
+                          href={item.href}
+                          className="block py-3 border-b border-gray-100 font-medium text-[#1A1A1A] hover:text-[#D71E1F] transition-colors"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {item.name}
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
 
-          {/* Logo */}
-          <div className="flex-1 flex justify-center lg:justify-start">
-            <a href="/" className="flex items-center gap-3">
-              <div className="bg-[#D71E1F] p-2 rounded-lg">
-                <Newspaper className="w-8 h-8 text-white" />
+          {/* Column 2 - Center (Logo) */}
+          <div className="flex justify-center">
+            <a href="/" className="flex flex-col items-center gap-2">
+              <div className="bg-[#D71E1F] p-3 rounded-xl">
+                <Newspaper className="w-10 h-10 text-white" />
               </div>
-              <div className="hidden sm:block">
-                <h1 className="text-2xl font-bold text-[#1A1A1A] tracking-tight">
+              <div className="text-center">
+                <h1 className="text-2xl sm:text-3xl font-bold text-[#1A1A1A] tracking-tight">
                   Folha News Brasil
                 </h1>
-                <p className="text-xs text-[#333333] -mt-1">Seu portal de notícias</p>
+                <p className="text-xs sm:text-sm text-[#333333] font-light">Seu portal de notícias</p>
               </div>
             </a>
           </div>
 
-          {/* Search */}
-          <div className="flex items-center gap-2">
+          {/* Column 3 - Right (Search) */}
+          <div className="flex items-center justify-end">
             <div className={`${isSearchOpen ? 'flex' : 'hidden'} sm:flex items-center`}>
               <div className="relative">
                 <Input
                   type="search"
                   placeholder="Buscar notícias..."
-                  className="w-48 md:w-64 pr-10 bg-white border-gray-300 focus:border-[#D71E1F] focus:ring-[#D71E1F]"
+                  className="w-40 md:w-56 pr-10 bg-white border-gray-300 focus:border-[#D71E1F] focus:ring-[#D71E1F]"
                 />
                 <Button
                   size="icon"
@@ -140,12 +144,12 @@ export default function BrandingHeader() {
       {/* Navigation */}
       <nav className="bg-white border-t border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4">
-          <ul className="hidden lg:flex items-center justify-center gap-1">
-            {navItems.map((item) => (
-              <li key={item.name}>
+          <ul className="hidden lg:flex items-center justify-center" style={{ gap: '25px' }}>
+            {navItems.map((item, index) => (
+              <li key={`${item.name}-${index}`}>
                 {item.dropdown ? (
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="flex items-center gap-1 px-4 py-4 text-sm font-semibold text-[#333333] hover:text-[#D71E1F] transition-colors nav-link-underline">
+                    <DropdownMenuTrigger className="flex items-center gap-1 px-2 py-4 text-sm font-light text-[#333333] hover:text-[#D71E1F] transition-colors nav-link-underline">
                       {item.name}
                       <ChevronDown className="w-4 h-4" />
                     </DropdownMenuTrigger>
@@ -154,7 +158,7 @@ export default function BrandingHeader() {
                         <DropdownMenuItem key={subItem.name} asChild>
                           <a
                             href={subItem.href}
-                            className="cursor-pointer hover:text-[#D71E1F]"
+                            className="cursor-pointer hover:text-[#D71E1F] font-light"
                           >
                             {subItem.name}
                           </a>
@@ -165,7 +169,7 @@ export default function BrandingHeader() {
                 ) : (
                   <a
                     href={item.href}
-                    className="block px-4 py-4 text-sm font-semibold text-[#333333] hover:text-[#D71E1F] transition-colors nav-link-underline"
+                    className="block px-2 py-4 text-sm font-light text-[#333333] hover:text-[#D71E1F] transition-colors nav-link-underline"
                   >
                     {item.name}
                   </a>
