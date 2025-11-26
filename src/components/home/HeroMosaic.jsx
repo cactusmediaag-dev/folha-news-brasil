@@ -19,31 +19,45 @@ const categoryLabels = {
   local: "Local",
 };
 
-export default function HeroMosaic({ posts = [] }) {
+export default function HeroMosaic({ posts = [], isLoading = false }) {
+  // Debug log
+  console.log('HeroMosaic - Total posts received:', posts.length);
+  console.log('HeroMosaic - Featured posts:', posts.filter(p => p.is_featured).map(p => p.title));
+
   // Filter featured posts first, then sort by date
   const featuredPosts = posts
-    .filter(p => p.is_featured)
+    .filter(p => p.is_featured === true)
     .sort((a, b) => new Date(b.publish_date || b.created_date) - new Date(a.publish_date || a.created_date));
   
-  // If not enough featured posts, fill with regular posts
+  // If not enough featured posts, fill with regular posts sorted by date
+  const regularPosts = posts
+    .filter(p => !p.is_featured)
+    .sort((a, b) => new Date(b.publish_date || b.created_date) - new Date(a.publish_date || a.created_date));
+
   const displayPosts = featuredPosts.length >= 3 
     ? featuredPosts.slice(0, 3)
-    : [...featuredPosts, ...posts.filter(p => !p.is_featured)].slice(0, 3);
+    : [...featuredPosts, ...regularPosts].slice(0, 3);
+
+  console.log('HeroMosaic - Display posts:', displayPosts.map(p => ({ title: p.title, featured: p.is_featured })));
 
   const mainPost = displayPosts[0];
   const sidePosts = displayPosts.slice(1, 3);
 
-  if (!mainPost) {
+  // Loading skeleton
+  if (isLoading || !mainPost) {
     return (
       <section className="py-6 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="hero-mosaic-grid">
-            <div className="main-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center">
-              <p className="text-gray-500 font-semibold">Carregando notícias...</p>
+            <div className="main-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center animate-pulse">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-4"></div>
+                <p className="text-gray-500 font-semibold">Carregando notícias...</p>
+              </div>
             </div>
             <div className="side-posts">
-              <div className="side-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl"></div>
-              <div className="side-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl"></div>
+              <div className="side-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl animate-pulse"></div>
+              <div className="side-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl animate-pulse"></div>
             </div>
           </div>
         </div>

@@ -36,7 +36,7 @@ export default function Home() {
       <HeaderAdBanner />
 
       {/* Hero Mosaic */}
-      <HeroMosaic posts={sortedPosts} />
+      <HeroMosaic posts={sortedPosts} isLoading={isLoading} />
 
       {/* Web Stories Carousel */}
       <WebStoriesCarousel />
