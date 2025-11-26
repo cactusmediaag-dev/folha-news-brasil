@@ -255,46 +255,87 @@ export default function PostEditor() {
                 <CardHeader className="pb-3">
                   <CardTitle className="text-base font-semibold">Conteúdo</CardTitle>
                 </CardHeader>
-                <CardContent className="p-0">
+                <CardContent className="p-0 pb-12">
                   <style>{`
-                    .quill-editor-wrapper .ql-container {
-                      font-family: 'Titillium Web', sans-serif !important;
-                      font-size: 16px;
-                      border: none !important;
-                      border-top: 1px solid #E2E8F0 !important;
+                    /* Reset any global SVG styles that might affect Quill */
+                    .quill-editor-wrapper svg {
+                      width: auto !important;
+                      height: auto !important;
+                      max-width: 18px !important;
+                      max-height: 18px !important;
+                      display: inline-block !important;
                     }
-                    .quill-editor-wrapper .ql-toolbar {
+                    .quill-editor-wrapper {
+                      position: relative;
+                      background: white;
+                      border-radius: 0 0 8px 8px;
+                      overflow: hidden;
+                    }
+                    .quill-editor-wrapper .ql-toolbar.ql-snow {
                       font-family: 'Titillium Web', sans-serif !important;
                       border: none !important;
                       border-bottom: 1px solid #E2E8F0 !important;
                       background: #F8FAFC;
-                      padding: 12px !important;
+                      padding: 12px 16px !important;
+                      display: flex;
+                      flex-wrap: wrap;
+                      gap: 4px;
                     }
-                    .quill-editor-wrapper .ql-toolbar button {
-                      width: 28px !important;
-                      height: 28px !important;
-                      padding: 4px !important;
+                    .quill-editor-wrapper .ql-toolbar.ql-snow .ql-formats {
+                      margin-right: 12px !important;
+                      display: flex;
+                      align-items: center;
+                      gap: 2px;
                     }
-                    .quill-editor-wrapper .ql-toolbar button svg {
+                    .quill-editor-wrapper .ql-toolbar.ql-snow button {
+                      width: 32px !important;
+                      height: 32px !important;
+                      padding: 6px !important;
+                      display: flex !important;
+                      align-items: center !important;
+                      justify-content: center !important;
+                      border-radius: 4px !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar.ql-snow button:hover {
+                      background: #E2E8F0 !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar.ql-snow button svg {
+                      width: 16px !important;
+                      height: 16px !important;
+                      max-width: 16px !important;
+                      max-height: 16px !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar.ql-snow .ql-picker {
+                      height: 32px !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar.ql-snow .ql-picker-label {
+                      padding: 4px 8px !important;
+                      border-radius: 4px !important;
+                      display: flex !important;
+                      align-items: center !important;
+                    }
+                    .quill-editor-wrapper .ql-toolbar.ql-snow .ql-picker-label svg {
                       width: 16px !important;
                       height: 16px !important;
                     }
-                    .quill-editor-wrapper .ql-toolbar .ql-picker {
-                      height: 28px !important;
-                    }
-                    .quill-editor-wrapper .ql-toolbar .ql-picker-label {
-                      padding: 4px 8px !important;
+                    .quill-editor-wrapper .ql-container.ql-snow {
+                      font-family: 'Titillium Web', sans-serif !important;
+                      font-size: 16px;
+                      border: none !important;
+                      min-height: 400px;
                     }
                     .quill-editor-wrapper .ql-editor {
                       min-height: 400px;
-                      padding: 20px !important;
+                      padding: 24px !important;
                       background: white;
-                      line-height: 1.7;
+                      line-height: 1.8;
+                      font-size: 16px;
                     }
                     .quill-editor-wrapper .ql-editor.ql-blank::before {
                       font-style: normal;
                       color: #94A3B8;
-                      left: 20px;
+                      left: 24px;
+                      font-size: 16px;
                     }
                     .quill-editor-wrapper .ql-editor p {
                       margin-bottom: 1em;
@@ -315,17 +356,26 @@ export default function PostEditor() {
                       margin: 1em 0;
                       color: #64748B;
                       font-style: italic;
+                      background: #F8FAFC;
+                      padding: 12px 16px;
+                      border-radius: 0 8px 8px 0;
                     }
                     .quill-editor-wrapper .ql-snow .ql-stroke {
                       stroke: #475569 !important;
+                      stroke-width: 2px !important;
                     }
                     .quill-editor-wrapper .ql-snow .ql-fill {
                       fill: #475569 !important;
                     }
-                    .quill-editor-wrapper .ql-snow button:hover .ql-stroke {
+                    .quill-editor-wrapper .ql-snow .ql-thin {
+                      stroke-width: 1px !important;
+                    }
+                    .quill-editor-wrapper .ql-snow button:hover .ql-stroke,
+                    .quill-editor-wrapper .ql-snow .ql-picker-label:hover .ql-stroke {
                       stroke: #D71E1F !important;
                     }
-                    .quill-editor-wrapper .ql-snow button:hover .ql-fill {
+                    .quill-editor-wrapper .ql-snow button:hover .ql-fill,
+                    .quill-editor-wrapper .ql-snow .ql-picker-label:hover .ql-fill {
                       fill: #D71E1F !important;
                     }
                     .quill-editor-wrapper .ql-snow button.ql-active .ql-stroke {
@@ -333,6 +383,11 @@ export default function PostEditor() {
                     }
                     .quill-editor-wrapper .ql-snow button.ql-active .ql-fill {
                       fill: #D71E1F !important;
+                    }
+                    .quill-editor-wrapper .ql-snow .ql-picker.ql-expanded .ql-picker-options {
+                      border-color: #E2E8F0 !important;
+                      box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+                      border-radius: 8px !important;
                     }
                   `}</style>
                   <div className="quill-editor-wrapper">
@@ -344,18 +399,17 @@ export default function PostEditor() {
                       modules={{
                         toolbar: [
                           [{ header: [2, 3, false] }],
-                          ["bold", "italic", "underline"],
+                          ["bold", "italic", "underline", "strike", "blockquote"],
                           [{ list: "ordered" }, { list: "bullet" }],
-                          ["blockquote", "link"],
-                          ["image"],
+                          ["link", "image", "video"],
                           ["clean"],
                         ],
                       }}
                       formats={[
                         "header",
-                        "bold", "italic", "underline",
+                        "bold", "italic", "underline", "strike", "blockquote",
                         "list", "bullet",
-                        "blockquote", "link", "image"
+                        "link", "image", "video"
                       ]}
                     />
                   </div>
