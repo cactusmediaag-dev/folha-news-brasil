@@ -12,7 +12,7 @@ import TopBar from "@/components/home/TopBar";
 import BrandingHeader from "@/components/home/BrandingHeader";
 import Footer from "@/components/home/Footer";
 import InlineAdBanner from "@/components/home/InlineAdBanner";
-import { CATEGORY_COLORS, CATEGORY_LABELS, darkenColor } from "@/components/shared/CategoryColors";
+import { CATEGORY_COLORS, CATEGORY_LABELS, CATEGORY_GRADIENTS } from "@/components/shared/CategoryColors";
 
 const POSTS_PER_PAGE = 6;
 
@@ -22,8 +22,8 @@ export default function Categoria() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const categoryColor = CATEGORY_COLORS[slug] || "#607D8B";
+  const categoryGradient = CATEGORY_GRADIENTS[slug] || CATEGORY_GRADIENTS['default'];
   const categoryLabel = CATEGORY_LABELS[slug] || slug;
-  const borderColor = darkenColor(categoryColor, 20);
 
   // Fetch all posts for this category
   const { data: allPosts = [], isLoading } = useQuery({
@@ -51,17 +51,27 @@ export default function Categoria() {
       <TopBar />
       <BrandingHeader />
 
-      {/* Barra de Identidade - The "Terra" Bar */}
-      <section
-        style={{
-          backgroundColor: categoryColor,
-          borderBottom: `4px solid ${borderColor}`,
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-10" style={{ padding: '20px 40px' }}>
-          <h1 className="text-2xl sm:text-[32px] font-bold text-white uppercase tracking-wide">
-            {categoryLabel}
-          </h1>
+      {/* Barra de Identidade - Boxed Gradient Card */}
+      <section className="max-w-7xl mx-auto px-4" style={{ marginTop: '30px', marginBottom: '10px' }}>
+        <div
+          className="flex items-center"
+          style={{
+            background: categoryGradient,
+            borderRadius: '12px',
+            minHeight: '100px',
+            padding: '0 40px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+          }}
+        >
+          <div>
+            <p className="text-white/80 text-sm mb-1">Início &gt; {categoryLabel}</p>
+            <h1 
+              className="text-2xl sm:text-[32px] font-bold text-white uppercase tracking-wide"
+              style={{ textShadow: '0 2px 4px rgba(0,0,0,0.1)' }}
+            >
+              {categoryLabel}
+            </h1>
+          </div>
         </div>
       </section>
 

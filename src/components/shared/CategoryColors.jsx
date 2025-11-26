@@ -1,20 +1,40 @@
-// Design System - Cores das Categorias
+// Design System - Cores das Categorias (Sólidas - para badges, etc)
 export const CATEGORY_COLORS = {
-  'politica': '#B71C1C',      // Vermelho Escuro
-  'economia': '#2E7D32',      // Verde Dinheiro
-  'esportes': '#EF6C00',      // Laranja Vibrante
-  'entretenimento': '#9C27B0', // Roxo
-  'tecnologia': '#0288D1',    // Azul Tech
-  'saude': '#009688',         // Verde Água
-  'educacao': '#FBC02D',      // Amarelo/Ouro
-  'mundo': '#1565C0',         // Azul Escuro
-  'brasil': '#43A047',        // Verde Bandeira
-  'local': '#607D8B',         // Cinza Urbano
-  'cidade': '#546E7A',        // Azul Acinzentado
-  'turismo': '#00BCD4',       // Ciano
-  'transporte': '#455A64',    // Grafite
-  'musica': '#E91E63',        // Rosa Choque
-  'ciencia': '#673AB7'        // Índigo
+  'politica': '#B71C1C',
+  'economia': '#2E7D32',
+  'esportes': '#EF6C00',
+  'entretenimento': '#9C27B0',
+  'tecnologia': '#0288D1',
+  'saude': '#009688',
+  'educacao': '#FBC02D',
+  'mundo': '#1565C0',
+  'brasil': '#43A047',
+  'local': '#607D8B',
+  'cidade': '#546E7A',
+  'turismo': '#00BCD4',
+  'transporte': '#455A64',
+  'musica': '#E91E63',
+  'ciencia': '#673AB7'
+};
+
+// Gradientes Suaves para Headers de Categoria
+export const CATEGORY_GRADIENTS = {
+  'politica': 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
+  'economia': 'linear-gradient(135deg, #43C6AC 0%, #F8FFAE 100%)',
+  'esportes': 'linear-gradient(135deg, #F2994A 0%, #F2C94C 100%)',
+  'tecnologia': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+  'mundo': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  'entretenimento': 'linear-gradient(135deg, #c471f5 0%, #fa71cd 100%)',
+  'musica': 'linear-gradient(135deg, #f77062 0%, #fe5196 100%)',
+  'ciencia': 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)',
+  'saude': 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
+  'cidade': 'linear-gradient(135deg, #93a5cf 0%, #e4efe9 100%)',
+  'local': 'linear-gradient(135deg, #93a5cf 0%, #e4efe9 100%)',
+  'educacao': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+  'brasil': 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+  'turismo': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+  'transporte': 'linear-gradient(135deg, #536976 0%, #292E49 100%)',
+  'default': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
 };
 
 export const CATEGORY_LABELS = {
