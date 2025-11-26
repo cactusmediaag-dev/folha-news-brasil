@@ -41,10 +41,15 @@ export default function ArticleHeader({ post }) {
 
   return (
     <header className="max-w-[1140px] mx-auto px-4 py-10 sm:py-14">
-      {/* Title - Impactful */}
+      {/* Title - Elegant */}
       <h1 
-        className="text-3xl sm:text-4xl lg:text-[3rem] font-extrabold text-[#1A1A1A] leading-[1.15] mb-6"
-        style={{ fontWeight: 800 }}
+        className="text-2xl sm:text-3xl lg:text-[2.5rem] font-bold leading-[1.2] mb-6"
+        style={{ 
+          fontFamily: "'Overpass', sans-serif",
+          fontWeight: 700,
+          letterSpacing: '-0.5px',
+          color: '#1A202C'
+        }}
       >
         {post.title}
       </h1>

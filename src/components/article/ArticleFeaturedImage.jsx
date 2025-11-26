@@ -5,14 +5,15 @@ export default function ArticleFeaturedImage({ src, alt, caption }) {
 
   return (
     <figure className="max-w-[1140px] mx-auto px-4 mb-10">
-      <div 
-        className="rounded-xl overflow-hidden shadow-lg" 
-        style={{ aspectRatio: '16/9' }}
-      >
+      <div className="rounded-xl overflow-hidden" style={{ boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
         <img
           src={src}
           alt={alt}
-          className="w-full h-full object-cover"
+          className="w-full object-cover"
+          style={{ 
+            maxHeight: '450px',
+            objectPosition: 'center 20%'
+          }}
           loading="eager"
         />
       </div>
