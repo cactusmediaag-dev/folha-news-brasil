@@ -1,5 +1,5 @@
 import React from "react";
-import { Newspaper, Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
 const footerLinks = {
   institucional: [
@@ -33,14 +33,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="bg-[#D71E1F] p-2 rounded-lg">
-                <Newspaper className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold">Folha News Brasil</h3>
-                <p className="text-xs text-gray-400">Seu portal de notícias</p>
-              </div>
+            <div className="mb-4">
+              <img 
+                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6925f248881ba46b069e0c80/888e32f70_branco_folha.png" 
+                alt="Folha News Brasil" 
+                className="h-12 w-auto"
+              />
             </div>
             <p className="text-sm text-gray-400 mb-6 max-w-sm">
               O portal de notícias mais completo do Brasil. Informação de qualidade, 24 horas por dia.
