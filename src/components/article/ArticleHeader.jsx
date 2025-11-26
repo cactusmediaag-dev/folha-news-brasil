@@ -40,15 +40,15 @@ export default function ArticleHeader({ post }) {
   };
 
   return (
-    <header className="max-w-3xl mx-auto px-4 py-8 text-center">
+    <header className="max-w-[800px] mx-auto px-4 py-8 sm:py-12 text-center">
       {/* Title */}
-      <h1 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-[#333333] leading-tight mb-4">
+      <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-bold text-[#222222] leading-tight mb-4">
         {post.title}
       </h1>
 
       {/* Subtitle */}
       {post.subtitle && (
-        <p className="text-lg sm:text-xl text-gray-500 leading-relaxed mb-6">
+        <p className="text-base sm:text-lg text-[#666666] leading-relaxed mb-5" style={{ marginBottom: '20px' }}>
           {post.subtitle}
         </p>
       )}
@@ -82,17 +82,15 @@ export default function ArticleHeader({ post }) {
       </div>
 
       {/* Author Info */}
-      <div className="mb-4">
-        {post.author_name && (
-          <p className="font-bold text-[#333333]">Por {post.author_name}</p>
-        )}
-        <p className="text-sm text-gray-500">
-          <time dateTime={post.publish_date || post.created_date}>
+      <div className="mb-4 text-sm">
+        <p className="text-[#333333]">
+          {post.author_name && (
+            <span className="font-semibold">Por {post.author_name}</span>
+          )}
+          {post.author_name && " - "}
+          <time dateTime={post.publish_date || post.created_date} className="text-gray-500">
             {format(new Date(post.publish_date || post.created_date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
           </time>
-          {post.updated_date && post.updated_date !== post.created_date && (
-            <span> | Atualizado em {format(new Date(post.updated_date), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}</span>
-          )}
         </p>
       </div>
 
