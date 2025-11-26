@@ -12,10 +12,14 @@ import Sidebar from "@/components/home/Sidebar";
 import Footer from "@/components/home/Footer";
 
 export default function Home() {
-  const { data: posts = [], isLoading } = useQuery({
+  const { data: posts = [], isLoading, error } = useQuery({
     queryKey: ['public-posts'],
     queryFn: () => base44.entities.Post.filter({ status: 'published' }, '-publish_date', 20),
+    staleTime: 0,
+    refetchOnMount: true,
   });
+
+  console.log('Home - isLoading:', isLoading, 'posts:', posts.length, 'error:', error);
 
   // Sort by featured first, then by date
   const sortedPosts = [...posts].sort((a, b) => {
