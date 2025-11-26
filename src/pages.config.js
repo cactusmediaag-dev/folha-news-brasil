@@ -10,6 +10,7 @@ import Painel from './pages/Painel';
 import Home from './pages/Home';
 import Noticia from './pages/Noticia';
 import Categoria from './pages/Categoria';
+import WebStories from './pages/WebStories';
 import __Layout from './Layout.jsx';
 
 
@@ -26,6 +27,7 @@ export const PAGES = {
     "Home": Home,
     "Noticia": Noticia,
     "Categoria": Categoria,
+    "WebStories": WebStories,
 }
 
 export const pagesConfig = {

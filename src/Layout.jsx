@@ -12,6 +12,7 @@ import {
   LogOut,
   Menu,
   ChevronDown,
+  Smartphone,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +27,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 const navigation = [
   { name: "Dashboard", page: "Dashboard", icon: LayoutDashboard },
   { name: "Notícias", page: "Posts", icon: FileText },
+  { name: "Web Stories", page: "WebStories", icon: Smartphone },
   { name: "Banners", page: "Banners", icon: Image },
   { name: "Web Push", page: "WebPush", icon: Bell },
   { name: "Equipe", page: "Team", icon: Users },
