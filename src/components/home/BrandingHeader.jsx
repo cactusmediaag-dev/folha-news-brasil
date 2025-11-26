@@ -101,7 +101,7 @@ export default function BrandingHeader() {
             <li key={`${item.name}-${index}`}>
                 {item.dropdown ?
               <DropdownMenu>
-                    <DropdownMenuTrigger className="nav-link-underline flex items-center gap-1">
+                    <DropdownMenuTrigger className="flex items-center gap-1 px-2 py-4 text-[15px] font-semibold text-[#1A1A1A] hover:text-[#D71E1F] transition-colors nav-link-underline uppercase tracking-wide">
                       {item.name}
                       <ChevronDown className="w-4 h-4" />
                     </DropdownMenuTrigger>
@@ -121,7 +121,7 @@ export default function BrandingHeader() {
 
               <a
                 href={item.href}
-                className="nav-link-underline">
+                className="block px-2 py-4 text-[15px] font-semibold text-[#1A1A1A] hover:text-[#D71E1F] transition-colors nav-link-underline uppercase tracking-wide">
 
                     {item.name}
                   </a>

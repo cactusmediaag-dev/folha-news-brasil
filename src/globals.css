@@ -166,48 +166,28 @@ input, textarea, select {
   }
 }
 
-/* Navigation Menu - Bold & Professional (Overpass Forced) */
-header nav a, 
-header nav button,
-.nav-link-underline,
-.main-menu-item {
-  font-family: 'Overpass', sans-serif !important;
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  padding: 12px 20px 8px 20px !important;
-  display: inline-block;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  color: #1A1A1A !important;
-  text-decoration: none;
-  transition: color 0.2s ease, background-color 0.2s ease;
+/* Navigation Menu - Bold & Professional */
+.nav-link-underline {
   position: relative;
-}
-
-header nav a:hover, 
-header nav button:hover,
-.nav-link-underline:hover,
-.main-menu-item:hover {
-  color: #D71E1F !important;
-  background-color: rgba(0,0,0,0.03);
-  border-radius: 4px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .nav-link-underline::after {
   content: '';
   position: absolute;
-  bottom: 4px;
-  left: 20px;
-  right: 20px;
-  width: auto;
+  bottom: -4px;
+  left: 0;
+  width: 0;
   height: 3px;
   background-color: var(--primary-color);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  transition: width 0.3s ease;
 }
 
 .nav-link-underline:hover::after {
-  transform: scaleX(1);
+  width: 100%;
 }
 
 /* Subtitle / Lead Text */
