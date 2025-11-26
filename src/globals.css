@@ -166,9 +166,13 @@ input, textarea, select {
   }
 }
 
-/* Red underline animation */
+/* Navigation Menu - Bold & Professional */
 .nav-link-underline {
   position: relative;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .nav-link-underline::after {
@@ -184,6 +188,38 @@ input, textarea, select {
 
 .nav-link-underline:hover::after {
   width: 100%;
+}
+
+/* Subtitle / Lead Text */
+.lead-text {
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Article Body - Optimized for reading */
+.article-body {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-body);
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .article-body {
+    font-size: 16px;
+  }
+}
+
+/* Category Badges */
+.category-badge {
+  font-family: var(--font-primary) !important;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 /* Stories circle border */
