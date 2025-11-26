@@ -39,7 +39,7 @@ export default function BrandingHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="bg-[#DADADA]">
+    <header className="bg-slate-50">
       {/* Main Header - 3 Column Grid Layout */}
       <div className="bg-zinc-50 mx-auto px-4 max-w-7xl" style={{ paddingTop: '35px', paddingBottom: '35px' }}>
         <div className="grid grid-cols-3 items-center">
@@ -95,12 +95,16 @@ export default function BrandingHeader() {
 
           {/* Column 2 - Center (Logo) */}
           <div className="flex justify-center">
-            <a href="/">
-              <img 
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6925f248881ba46b069e0c80/8b8dd9df9_f_news_brasil_logo_002.png" 
-                alt="Folha News Brasil" 
-                className="h-16 sm:h-20 w-auto"
-              />
+            <a href="/" className="flex flex-col items-center gap-2">
+              <div className="bg-[#D71E1F] p-3 rounded-xl">
+                <Newspaper className="w-10 h-10 text-white" />
+              </div>
+              <div className="text-center">
+                <h1 className="text-2xl sm:text-3xl font-bold text-[#1A1A1A] tracking-tight">
+                  Folha News Brasil
+                </h1>
+                <p className="text-xs sm:text-sm text-[#333333] font-light">Seu portal de notícias</p>
+              </div>
             </a>
           </div>
 
