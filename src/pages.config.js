@@ -9,6 +9,7 @@ import Settings from './pages/Settings';
 import Painel from './pages/Painel';
 import Home from './pages/Home';
 import Noticia from './pages/Noticia';
+import Categoria from './pages/Categoria';
 import __Layout from './Layout.jsx';
 
 
@@ -24,6 +25,7 @@ export const PAGES = {
     "Painel": Painel,
     "Home": Home,
     "Noticia": Noticia,
+    "Categoria": Categoria,
 }
 
 export const pagesConfig = {
