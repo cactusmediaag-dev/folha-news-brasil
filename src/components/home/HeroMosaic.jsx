@@ -43,8 +43,8 @@ export default function HeroMosaic({ posts = [], isLoading = false }) {
   const mainPost = displayPosts[0];
   const sidePosts = displayPosts.slice(1, 3);
 
-  // Loading skeleton
-  if (isLoading || !mainPost) {
+  // Loading skeleton - show while loading OR when we don't have enough posts yet
+  if (isLoading || displayPosts.length < 3) {
     return (
       <section className="py-6 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
@@ -52,7 +52,7 @@ export default function HeroMosaic({ posts = [], isLoading = false }) {
             <div className="main-post bg-gradient-to-br from-gray-200 to-gray-300 rounded-xl flex items-center justify-center animate-pulse">
               <div className="text-center">
                 <div className="w-16 h-16 bg-gray-300 rounded-full mx-auto mb-4"></div>
-                <p className="text-gray-500 font-semibold">Carregando notícias...</p>
+                <p className="text-gray-500 font-semibold">Carregando destaques...</p>
               </div>
             </div>
             <div className="side-posts">
