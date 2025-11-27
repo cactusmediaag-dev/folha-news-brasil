@@ -10,6 +10,7 @@ import WebStoriesCarousel from "@/components/home/WebStoriesCarousel";
 import LatestNewsSection from "@/components/home/LatestNewsSection";
 import InlineAdBanner from "@/components/home/InlineAdBanner";
 import CidadesSection from "@/components/home/CidadesSection";
+import EntertainmentWorldSection from "@/components/home/EntertainmentWorldSection";
 import Footer from "@/components/home/Footer";
 
 export default function Home() {
@@ -50,7 +51,10 @@ export default function Home() {
       {/* Inline Ad Banner */}
       <InlineAdBanner />
 
-      {/* Categoria Cidades - Sessão 4 */}
+      {/* Entretenimento & Mundo - Sessão 4 */}
+      <EntertainmentWorldSection />
+
+      {/* Categoria Cidades - Sessão 5 */}
       <CidadesSection />
 
       {/* Footer */}
