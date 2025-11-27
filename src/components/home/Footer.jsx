@@ -1,133 +1,121 @@
-import React from "react";
-import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { createPageUrl } from "@/utils";
+import { Instagram, Facebook, Youtube, Twitter, ArrowUp } from "lucide-react";
 
-const footerLinks = {
-  institucional: [
-    { name: "Sobre Nós", href: "#" },
-    { name: "Expediente", href: "#" },
-    { name: "Trabalhe Conosco", href: "#" },
-    { name: "Política de Privacidade", href: "#" },
-    { name: "Termos de Uso", href: "#" },
-  ],
-  editorias: [
-    { name: "Política", href: "#" },
-    { name: "Economia", href: "#" },
-    { name: "Esportes", href: "#" },
-    { name: "Tecnologia", href: "#" },
-    { name: "Mundo", href: "#" },
-  ],
-  servicos: [
-    { name: "Anuncie", href: "#" },
-    { name: "Assinaturas", href: "#" },
-    { name: "Edições Digitais", href: "#" },
-    { name: "RSS", href: "#" },
-    { name: "Aplicativos", href: "#" },
-  ],
-};
+const socialLinks = [
+  { icon: Instagram, href: "https://instagram.com/folhanewsbrasil", label: "Instagram" },
+  { icon: Facebook, href: "https://facebook.com/folhanewsbrasil", label: "Facebook" },
+  { icon: Youtube, href: "https://youtube.com/folhanewsbrasil", label: "YouTube" },
+  { icon: Twitter, href: "https://twitter.com/folhanewsbrasil", label: "X (Twitter)" },
+];
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Web Stories", href: "/#webstories" },
+  { name: "Política", href: "/Categoria?slug=politica" },
+  { name: "Economia", href: "/Categoria?slug=economia" },
+  { name: "Esportes", href: "/Categoria?slug=esportes" },
+  { name: "Cidades", href: "/Categoria?slug=cidade" },
+  { name: "Tecnologia", href: "/Categoria?slug=tecnologia" },
+  { name: "Mundo", href: "/Categoria?slug=mundo" },
+  { name: "Entretenimento", href: "/Categoria?slug=entretenimento" },
+];
 
 export default function Footer() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-[#1A1A1A] text-white">
-      {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <div className="mb-4">
-              <img 
-                src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6925f248881ba46b069e0c80/888e32f70_branco_folha.png" 
-                alt="Folha News Brasil" 
-                className="h-12 w-auto"
-              />
-            </div>
-            <p className="text-sm text-gray-400 mb-6 max-w-sm">
-              O portal de notícias mais completo do Brasil. Informação de qualidade, 24 horas por dia.
-            </p>
-            
-            {/* Contact Info */}
-            <div className="space-y-2 text-sm text-gray-400">
-              <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                <span>contato@folhanewsbrasil.com.br</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>(11) 3000-0000</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>São Paulo, SP - Brasil</span>
-              </div>
-            </div>
+    <>
+      <footer 
+        className="w-full"
+        style={{ 
+          backgroundColor: '#D71E1F',
+          paddingTop: '60px',
+          paddingBottom: '40px'
+        }}
+      >
+        <div className="flex flex-col items-center gap-8">
+          {/* Logo - White Version */}
+          <img
+            src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6925f248881ba46b069e0c80/8b8dd9df9_f_news_brasil_logo_002.png"
+            alt="Folha News Brasil"
+            className="h-12 w-auto"
+            style={{ filter: 'brightness(0) invert(1)' }}
+          />
 
-            {/* Social Links */}
-            <div className="flex gap-3 mt-6">
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#D71E1F] transition-colors">
-                <Facebook className="w-5 h-5" />
+          {/* Social Icons */}
+          <div className="flex items-center gap-6">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="text-white hover:scale-110 transition-transform duration-200"
+              >
+                <social.icon className="w-6 h-6" strokeWidth={1.5} />
               </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#D71E1F] transition-colors">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#D71E1F] transition-colors">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#D71E1F] transition-colors">
-                <Youtube className="w-5 h-5" />
-              </a>
-            </div>
+            ))}
           </div>
 
-          {/* Links Columns */}
-          <div>
-            <h4 className="font-bold mb-4 text-white">Institucional</h4>
-            <ul className="space-y-2">
-              {footerLinks.institucional.map((link) => (
-                <li key={link.name}>
-                  <a href={link.href} className="text-sm text-gray-400 hover:text-[#D71E1F] transition-colors">
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Navigation Links */}
+          <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 px-6 max-w-4xl">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-white/90 hover:text-white transition-colors"
+                style={{
+                  fontFamily: "'Overpass', sans-serif",
+                  fontWeight: 600,
+                  fontSize: '14px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px'
+                }}
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
 
-          <div>
-            <h4 className="font-bold mb-4 text-white">Editorias</h4>
-            <ul className="space-y-2">
-              {footerLinks.editorias.map((link) => (
-                <li key={link.name}>
-                  <a href={link.href} className="text-sm text-gray-400 hover:text-[#D71E1F] transition-colors">
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-bold mb-4 text-white">Serviços</h4>
-            <ul className="space-y-2">
-              {footerLinks.servicos.map((link) => (
-                <li key={link.name}>
-                  <a href={link.href} className="text-sm text-gray-400 hover:text-[#D71E1F] transition-colors">
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Copyright */}
+          <p 
+            className="text-white/60 mt-4"
+            style={{
+              fontFamily: "'Overpass', sans-serif",
+              fontSize: '12px'
+            }}
+          >
+            © 2025 Folha News Brasil — Todos os direitos reservados
+          </p>
         </div>
-      </div>
+      </footer>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-            <p>© 2025 Folha News Brasil. Todos os direitos reservados.</p>
-            <p>Desenvolvido com ❤️ para o jornalismo brasileiro</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+      {/* Scroll to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+          showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
+        aria-label="Voltar ao topo"
+        style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.15)' }}
+      >
+        <ArrowUp className="w-5 h-5 text-[#D71E1F]" strokeWidth={2.5} />
+      </button>
+    </>
   );
 }
