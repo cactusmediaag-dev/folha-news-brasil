@@ -4,6 +4,7 @@ import { createPageUrl } from "@/utils";
 import { Clock, Eye } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import WeatherWidget from "./WeatherWidget";
 
 const categoryLabels = {
   politica: "Política",
@@ -87,9 +88,12 @@ export default function LatestNewsSection({ posts = [] }) {
             ))}
           </div>
 
-          {/* Right Column - Timeline "Leia Também" */}
+          {/* Right Column - Weather + Timeline "Leia Também" */}
           <div className="hidden lg:block">
             <div className="sticky top-4">
+              {/* Weather Widget */}
+              <WeatherWidget />
+
               <h3 className="text-lg font-bold text-[#1A1A1A] mb-4">Leia Também</h3>
               
               {/* Timeline Container */}
@@ -99,7 +103,7 @@ export default function LatestNewsSection({ posts = [] }) {
 
                 {/* Timeline Items */}
                 <div className="space-y-4">
-                  {timelinePosts.slice(0, 8).map((post, index) => (
+                  {timelinePosts.slice(0, 5).map((post, index) => (
                     <Link
                       key={post.id}
                       to={`${createPageUrl("Noticia")}?slug=${post.slug}`}
