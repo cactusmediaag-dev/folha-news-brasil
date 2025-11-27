@@ -86,23 +86,44 @@ export default function PostEditor() {
   const [subcategorySuggestions, setSubcategorySuggestions] = useState([]);
   const [showSubcategorySuggestions, setShowSubcategorySuggestions] = useState(false);
 
-  // Fetch existing subcategories for autocomplete
-  const { data: existingPosts = [] } = useQuery({
-    queryKey: ['posts-subcategories', post.category],
-    queryFn: () => base44.entities.Post.filter({ category: post.category }),
-    enabled: !!post.category,
+  // Seed data para subcategorias
+  const SUBCATEGORY_SEEDS = [
+    // Esportes
+    "Futebol Brasileiro", "Brasileirão Série A", "Libertadores", "Seleção Brasileira", 
+    "Futebol Europeu", "Champions League", "Neymar", "Vini Jr", "Fórmula 1", "UFC", "NBA",
+    // Política
+    "Governo Federal", "Congresso Nacional", "STF", "Eleições", "Reforma Tributária", 
+    "Senado", "Câmara dos Deputados", "Lava Jato", "Segurança Pública", "Educação Pública",
+    // Economia
+    "Inflação", "Dólar", "Bolsa de Valores", "Ibovespa", "Agronegócio", "Imposto de Renda", 
+    "Petrobras", "Banco Central", "Selic", "Criptomoedas", "Bitcoin", "Startups",
+    // Cidades / Local
+    "Trânsito", "Clima e Tempo", "Obras Públicas", "Saúde Municipal", "Polícia Militar", 
+    "Acidentes", "Prefeitura de Cuiabá", "Governo de MT", "Várzea Grande", "Chapada dos Guimarães",
+    // Entretenimento & Mundo
+    "Novelas", "Streaming", "Netflix", "Reality Show", "BBB", "Música Sertaneja", 
+    "Fofocas", "Cinema", "Hollywood", "Guerra na Ucrânia", "Conflito Oriente Médio", 
+    "Eleições EUA", "Tecnologia", "Inteligência Artificial", "Redes Sociais", "Viral"
+  ];
+
+  // Fetch team members for author dropdown
+  const { data: teamMembers = [] } = useQuery({
+    queryKey: ['team-members-authors'],
+    queryFn: () => base44.entities.TeamMember.list(),
   });
 
+  // Fetch existing subcategories from database
+  const { data: dbSubcategories = [] } = useQuery({
+    queryKey: ['subcategories'],
+    queryFn: () => base44.entities.Subcategory.list(),
+  });
+
+  // Combine seeds with existing subcategories
   useEffect(() => {
-    if (existingPosts.length > 0 && post.category) {
-      const uniqueSubcats = [...new Set(
-        existingPosts
-          .filter(p => p.subcategory)
-          .map(p => p.subcategory)
-      )];
-      setSubcategorySuggestions(uniqueSubcats);
-    }
-  }, [existingPosts, post.category]);
+    const dbNames = dbSubcategories.map(s => s.name);
+    const allSubcats = [...new Set([...SUBCATEGORY_SEEDS, ...dbNames])];
+    setSubcategorySuggestions(allSubcats);
+  }, [dbSubcategories]);
 
   useEffect(() => {
     if (editId) {
@@ -675,9 +696,9 @@ Retorne APENAS os dados encontrados. Se não encontrar algum campo, retorne stri
                   </div>
 
                   <div className="relative">
-                    <Label className="text-sm font-medium text-slate-700">Subcategoria (Opcional)</Label>
+                    <Label className="text-sm font-medium text-slate-700">Subcategoria</Label>
                     <Input
-                      placeholder="Ex: Futebol, Rock, Tecnologia..."
+                      placeholder="Digite para buscar (ex: Futebol)..."
                       value={post.subcategory || ""}
                       onChange={(e) => {
                         setPost({ ...post, subcategory: e.target.value });
@@ -687,15 +708,16 @@ Retorne APENAS os dados encontrados. Se não encontrar algum campo, retorne stri
                       onBlur={() => setTimeout(() => setShowSubcategorySuggestions(false), 200)}
                       className="mt-2 bg-slate-50 border-slate-200 focus:bg-white"
                     />
-                    {showSubcategorySuggestions && subcategorySuggestions.length > 0 && post.category && (
-                      <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-40 overflow-y-auto">
+                    {showSubcategorySuggestions && (post.subcategory || "").length > 0 && (
+                      <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-48 overflow-y-auto">
                         {subcategorySuggestions
                           .filter(s => s.toLowerCase().includes((post.subcategory || "").toLowerCase()))
+                          .slice(0, 8)
                           .map((suggestion, idx) => (
                             <button
                               key={idx}
                               type="button"
-                              className="w-full px-3 py-2 text-left text-sm hover:bg-slate-100 transition-colors"
+                              className="w-full px-3 py-2 text-left text-sm hover:bg-emerald-50 hover:text-emerald-700 transition-colors border-b border-slate-50 last:border-0"
                               onClick={() => {
                                 setPost({ ...post, subcategory: suggestion });
                                 setShowSubcategorySuggestions(false);
@@ -704,18 +726,38 @@ Retorne APENAS os dados encontrados. Se não encontrar algum campo, retorne stri
                               {suggestion}
                             </button>
                           ))}
+                        {!subcategorySuggestions.some(s => s.toLowerCase() === (post.subcategory || "").toLowerCase()) && (post.subcategory || "").length > 2 && (
+                          <button
+                            type="button"
+                            className="w-full px-3 py-2 text-left text-sm bg-emerald-50 text-emerald-700 font-medium"
+                            onClick={() => {
+                              setShowSubcategorySuggestions(false);
+                            }}
+                          >
+                            + Criar "{post.subcategory}"
+                          </button>
+                        )}
                       </div>
                     )}
                   </div>
 
                   <div>
                     <Label className="text-sm font-medium text-slate-700">Autor</Label>
-                    <Input
-                      placeholder="Nome do autor..."
+                    <Select
                       value={post.author_name}
-                      onChange={(e) => setPost({ ...post, author_name: e.target.value })}
-                      className="mt-2 bg-slate-50 border-slate-200 focus:bg-white"
-                    />
+                      onValueChange={(value) => setPost({ ...post, author_name: value })}
+                    >
+                      <SelectTrigger className="mt-2 bg-slate-50">
+                        <SelectValue placeholder="Selecione o autor..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {teamMembers.map((member) => (
+                          <SelectItem key={member.id} value={member.name}>
+                            {member.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
