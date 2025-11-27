@@ -32,21 +32,21 @@ const categoryColors = {
 };
 
 export default function HeroMosaic({ posts = [], isLoading = false }) {
-  // Filter featured posts first, then sort by date
+  // REGRA: Apenas notícias com is_featured = true
   const featuredPosts = posts
     .filter(p => p.is_featured === true)
-    .sort((a, b) => new Date(b.publish_date || b.created_date) - new Date(a.publish_date || a.created_date));
-  
-  // If not enough featured posts, fill with regular posts sorted by date
-  const regularPosts = posts
-    .filter(p => !p.is_featured)
-    .sort((a, b) => new Date(b.publish_date || b.created_date) - new Date(a.publish_date || a.created_date));
+    .sort((a, b) => new Date(b.publish_date || b.created_date) - new Date(a.publish_date || a.created_date))
+    .slice(0, 3); // Exatamente 3 posts
 
-  const displayPosts = featuredPosts.length >= 3 
-    ? featuredPosts.slice(0, 3)
-    : [...featuredPosts, ...regularPosts].slice(0, 3);
+  // Não preencher com posts regulares - apenas destaques
+  const displayPosts = featuredPosts;
 
-  // Loading skeleton
+  // Log para debug se não houver destaques suficientes
+  if (featuredPosts.length < 3) {
+    console.warn(`[HeroMosaic] Apenas ${featuredPosts.length} notícias marcadas como destaque. Necessário: 3`);
+  }
+
+  // Loading skeleton ou sem destaques suficientes
   if (isLoading || displayPosts.length < 3) {
     return (
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 16px' }}>

@@ -91,9 +91,15 @@ export default function SportsSection() {
                   >
                     {post.title}
                   </h3>
-                  <p className="text-xs text-gray-500 mt-2">
-                    {formatDate(post.publish_date || post.created_date)}
+                  <p 
+                    className="text-sm text-[#4A5568] mt-2 mb-3 line-clamp-3"
+                    style={{ fontFamily: "'Overpass', sans-serif", lineHeight: 1.4 }}
+                  >
+                    {post.subtitle || post.meta_description || ""}
                   </p>
+                  <span className="text-xs text-gray-500">
+                    {formatDate(post.publish_date || post.created_date)}
+                  </span>
                 </div>
               </Link>
             ))}
