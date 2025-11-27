@@ -63,7 +63,7 @@ export default function LatestNewsSection({ posts = [] }) {
                   <span className="text-xs font-semibold text-[#D71E1F] uppercase">
                     {categoryLabels[post.category] || post.category}
                   </span>
-                  <h3 className="text-base sm:text-lg font-bold text-[#1A1A1A] leading-tight mt-1 group-hover:text-[#D71E1F] transition-colors line-clamp-2">
+                  <h3 className="text-base font-bold text-[#1A1A1A] leading-snug mt-1 group-hover:text-[#D71E1F] transition-colors line-clamp-2" style={{ fontFamily: "'Overpass', sans-serif", letterSpacing: "-0.3px" }}>
                     {post.title}
                   </h3>
                   {post.subtitle && (
@@ -121,7 +121,7 @@ export default function LatestNewsSection({ posts = [] }) {
                       </span>
                       
                       {/* Title */}
-                      <h4 className="text-sm font-medium text-[#1A1A1A] leading-tight mt-1 group-hover:text-[#D71E1F] transition-colors line-clamp-2">
+                      <h4 className="text-sm font-semibold text-[#1A1A1A] mt-1 group-hover:text-[#D71E1F] transition-colors line-clamp-2" style={{ fontFamily: "'Overpass', sans-serif", lineHeight: "1.4", letterSpacing: "-0.3px" }}>
                         {post.title}
                       </h4>
                     </Link>
