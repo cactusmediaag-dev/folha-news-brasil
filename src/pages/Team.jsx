@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { createPageUrl } from "@/utils";
 import { base44 } from "@/api/base44Client";
 import { motion } from "framer-motion";
@@ -13,11 +13,30 @@ import {
   Mail,
   Calendar,
   FileText,
+  Plus,
+  X,
+  Loader2,
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const roleConfig = {
   admin: { label: "Admin", class: "bg-purple-100 text-purple-700", icon: Shield },
@@ -28,6 +47,10 @@ const roleConfig = {
 
 export default function Team() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newMember, setNewMember] = useState({ name: "", email: "", role: "jornalista" });
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     const auth = localStorage.getItem("fnb_auth");
@@ -41,6 +64,33 @@ export default function Team() {
     queryFn: () => base44.entities.User.list('-created_date'),
   });
 
+  const { data: teamMembers = [], isLoading: isLoadingTeam } = useQuery({
+    queryKey: ['team-members'],
+    queryFn: () => base44.entities.TeamMember.list('-created_date'),
+  });
+
+  const createMemberMutation = useMutation({
+    mutationFn: (data) => base44.entities.TeamMember.create(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['team-members'] });
+      setIsModalOpen(false);
+      setNewMember({ name: "", email: "", role: "jornalista" });
+      setIsSaving(false);
+    },
+  });
+
+  const handleSaveMember = async () => {
+    if (!newMember.name || !newMember.email) return;
+    setIsSaving(true);
+    createMemberMutation.mutate(newMember);
+  };
+
+  // Combine users and team members
+  const allMembers = [
+    ...users.map(u => ({ ...u, source: 'user' })),
+    ...teamMembers.map(m => ({ ...m, full_name: m.name, role_level: m.role, source: 'team' })),
+  ];
+
   const getInitials = (name) => {
     if (!name) return "?";
     return name.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2);
@@ -50,12 +100,77 @@ export default function Team() {
     <div className="min-h-screen bg-slate-50 p-4 sm:p-6 lg:p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-slate-900">Equipe Editorial</h1>
-          <p className="text-slate-500 text-sm mt-1">
-            Gerencie os membros da sua equipe.
-          </p>
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900">Equipe Editorial</h1>
+            <p className="text-slate-500 text-sm mt-1">
+              Gerencie os membros da sua equipe.
+            </p>
+          </div>
+          <Button onClick={() => setIsModalOpen(true)} className="bg-emerald-600 hover:bg-emerald-700">
+            <Plus className="w-4 h-4 mr-2" />
+            Novo Membro
+          </Button>
         </div>
+
+        {/* Add Member Modal */}
+        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Adicionar Membro</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4 py-4">
+              <div>
+                <Label>Nome Completo</Label>
+                <Input
+                  placeholder="João da Silva"
+                  value={newMember.name}
+                  onChange={(e) => setNewMember({ ...newMember, name: e.target.value })}
+                  className="mt-2"
+                />
+              </div>
+              <div>
+                <Label>E-mail</Label>
+                <Input
+                  type="email"
+                  placeholder="joao@email.com"
+                  value={newMember.email}
+                  onChange={(e) => setNewMember({ ...newMember, email: e.target.value })}
+                  className="mt-2"
+                />
+              </div>
+              <div>
+                <Label>Função</Label>
+                <Select
+                  value={newMember.role}
+                  onValueChange={(value) => setNewMember({ ...newMember, role: value })}
+                >
+                  <SelectTrigger className="mt-2">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="jornalista">Jornalista</SelectItem>
+                    <SelectItem value="editor">Editor</SelectItem>
+                    <SelectItem value="admin">Admin</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex justify-end gap-3 pt-4">
+                <Button variant="outline" onClick={() => setIsModalOpen(false)}>
+                  Cancelar
+                </Button>
+                <Button 
+                  onClick={handleSaveMember}
+                  disabled={isSaving || !newMember.name || !newMember.email}
+                  className="bg-emerald-600 hover:bg-emerald-700"
+                >
+                  {isSaving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                  Salvar
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-8">
@@ -66,7 +181,7 @@ export default function Team() {
             <Card className="border-0 shadow-lg shadow-slate-100">
               <CardContent className="p-5">
                 <p className="text-sm text-slate-500">Total</p>
-                <p className="text-2xl font-bold text-slate-900">{users.length}</p>
+                <p className="text-2xl font-bold text-slate-900">{allMembers.length}</p>
               </CardContent>
             </Card>
           </motion.div>
@@ -79,7 +194,7 @@ export default function Team() {
               <CardContent className="p-5">
                 <p className="text-sm text-slate-500">Admins</p>
                 <p className="text-2xl font-bold text-purple-600">
-                  {users.filter(u => u.role === 'admin' || u.role_level === 'admin').length}
+                  {allMembers.filter(u => u.role === 'admin' || u.role_level === 'admin').length}
                 </p>
               </CardContent>
             </Card>
@@ -93,7 +208,7 @@ export default function Team() {
               <CardContent className="p-5">
                 <p className="text-sm text-slate-500">Editores</p>
                 <p className="text-2xl font-bold text-blue-600">
-                  {users.filter(u => u.role_level === 'editor').length}
+                  {allMembers.filter(u => u.role_level === 'editor').length}
                 </p>
               </CardContent>
             </Card>
@@ -107,7 +222,7 @@ export default function Team() {
               <CardContent className="p-5">
                 <p className="text-sm text-slate-500">Jornalistas</p>
                 <p className="text-2xl font-bold text-emerald-600">
-                  {users.filter(u => u.role_level === 'jornalista').length}
+                  {allMembers.filter(u => u.role_level === 'jornalista').length}
                 </p>
               </CardContent>
             </Card>
@@ -115,7 +230,7 @@ export default function Team() {
         </div>
 
         {/* Team List */}
-        {isLoading ? (
+        {isLoading || isLoadingTeam ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[1, 2, 3].map(i => (
               <Card key={i} className="border-0 shadow-lg shadow-slate-100 animate-pulse">
@@ -131,7 +246,7 @@ export default function Team() {
               </Card>
             ))}
           </div>
-        ) : users.length === 0 ? (
+        ) : allMembers.length === 0 ? (
           <Card className="border-0 shadow-lg shadow-slate-100">
             <CardContent className="p-12 text-center">
               <Users className="w-12 h-12 text-slate-300 mx-auto mb-4" />
@@ -145,7 +260,7 @@ export default function Team() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {users.map((user, index) => {
+            {allMembers.map((user, index) => {
               const roleKey = user.role_level || user.role || 'user';
               const role = roleConfig[roleKey] || roleConfig.user;
               const RoleIcon = role.icon;
