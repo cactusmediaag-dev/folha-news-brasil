@@ -9,7 +9,7 @@ import HeroMosaic from "@/components/home/HeroMosaic";
 import WebStoriesCarousel from "@/components/home/WebStoriesCarousel";
 import LatestNewsSection from "@/components/home/LatestNewsSection";
 import InlineAdBanner from "@/components/home/InlineAdBanner";
-import CategorySection from "@/components/home/CategorySection";
+import CidadesSection from "@/components/home/CidadesSection";
 import Footer from "@/components/home/Footer";
 
 export default function Home() {
@@ -51,7 +51,7 @@ export default function Home() {
       <InlineAdBanner />
 
       {/* Categoria Cidades - Sessão 4 */}
-      <CategorySection category="cidades" posts={sortedPosts} />
+      <CidadesSection />
 
       {/* Footer */}
       <Footer />
