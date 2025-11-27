@@ -94,7 +94,7 @@ export default function LatestNewsSection({ posts = [] }) {
               {/* Weather Widget */}
               <WeatherWidget />
 
-              <h3 className="text-lg font-bold text-[#1A1A1A] mb-4">Leia Também</h3>
+              <h3 className="text-lg font-bold text-[#1A1A1A] mb-5 mt-6">Leia Também</h3>
               
               {/* Timeline Container */}
               <div className="relative pl-6">
@@ -102,8 +102,8 @@ export default function LatestNewsSection({ posts = [] }) {
                 <div className="absolute left-0 top-0 bottom-0 w-px bg-gray-200" />
 
                 {/* Timeline Items */}
-                <div className="space-y-4">
-                  {timelinePosts.slice(0, 5).map((post, index) => (
+                <div className="space-y-5">
+                  {timelinePosts.slice(0, 2).map((post, index) => (
                     <Link
                       key={post.id}
                       to={`${createPageUrl("Noticia")}?slug=${post.slug}`}
