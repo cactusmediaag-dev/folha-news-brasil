@@ -11,6 +11,7 @@ import LatestNewsSection from "@/components/home/LatestNewsSection";
 import InlineAdBanner from "@/components/home/InlineAdBanner";
 import CidadesSection from "@/components/home/CidadesSection";
 import EntertainmentWorldSection from "@/components/home/EntertainmentWorldSection";
+import SportsSection from "@/components/home/SportsSection";
 import Footer from "@/components/home/Footer";
 
 export default function Home() {
@@ -56,6 +57,9 @@ export default function Home() {
 
       {/* Categoria Cidades - Sessão 5 */}
       <CidadesSection />
+
+      {/* Esportes + Brasileirão - Sessão 6 */}
+      <SportsSection />
 
       {/* Footer */}
       <Footer />
