@@ -93,7 +93,7 @@ export default function Categoria() {
           // Single post - full width
           <Link
             to={`${createPageUrl("Noticia")}?slug=${heroPosts[0].slug}`}
-            className="block relative h-[400px] rounded-xl overflow-hidden group"
+            className="hero-main-card block relative rounded-xl overflow-hidden group"
           >
             <img
               src={heroPosts[0].featured_image || "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1200&h=800&fit=crop"}
@@ -112,11 +112,11 @@ export default function Categoria() {
           </Link>
         ) : (
           // 2 or 3 posts - mosaic layout
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-5" style={{ height: '450px' }}>
+          <div className="category-hero-grid">
             {/* Main Post */}
             <Link
               to={`${createPageUrl("Noticia")}?slug=${heroPosts[0].slug}`}
-              className="relative rounded-xl overflow-hidden group h-full"
+              className="hero-main-card relative rounded-xl overflow-hidden group"
             >
               <img
                 src={heroPosts[0].featured_image || "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1200&h=800&fit=crop"}
@@ -138,12 +138,12 @@ export default function Categoria() {
             </Link>
 
             {/* Side Posts */}
-            <div className="flex flex-col gap-5 h-full">
+            <div className="hero-side-column">
               {heroPosts.slice(1, 3).map((post) => (
                 <Link
                   key={post.id}
                   to={`${createPageUrl("Noticia")}?slug=${post.slug}`}
-                  className="relative flex-1 rounded-xl overflow-hidden group"
+                  className="hero-side-card relative rounded-xl overflow-hidden group"
                 >
                   <img
                     src={post.featured_image || "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=400&fit=crop"}
@@ -161,7 +161,7 @@ export default function Categoria() {
             </div>
           </div>
         )}
-      </section>
+        </div>
 
       {/* Mid-Page Ad Banner */}
       <InlineAdBanner />
