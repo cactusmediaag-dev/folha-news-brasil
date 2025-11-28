@@ -9,7 +9,7 @@ export default function ArticleBreadcrumb({ category }) {
   const categoryGradient = CATEGORY_GRADIENTS[category] || "linear-gradient(135deg, #374151 0%, #1f2937 100%)";
 
   return (
-    <div className="max-w-[1140px] mx-auto px-4 pt-8">
+    <div className="max-w-[1200px] mx-auto px-4 pt-8">
       {/* Breadcrumb Trail */}
       <nav className="flex items-center gap-2 text-sm text-gray-500 mb-4">
         <Link 

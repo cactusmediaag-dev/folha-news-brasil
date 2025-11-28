@@ -17,24 +17,24 @@ export const CATEGORY_COLORS = {
   'ciencia': '#673AB7'
 };
 
-// Gradientes Suaves para Headers de Categoria
+// Gradientes Vibrantes para Headers de Categoria (Alto Contraste)
 export const CATEGORY_GRADIENTS = {
-  'politica': 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
-  'economia': 'linear-gradient(135deg, #43C6AC 0%, #F8FFAE 100%)',
-  'esportes': 'linear-gradient(135deg, #F2994A 0%, #F2C94C 100%)',
-  'tecnologia': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-  'mundo': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  'entretenimento': 'linear-gradient(135deg, #c471f5 0%, #fa71cd 100%)',
-  'musica': 'linear-gradient(135deg, #f77062 0%, #fe5196 100%)',
-  'ciencia': 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)',
-  'saude': 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)',
-  'cidade': 'linear-gradient(135deg, #93a5cf 0%, #e4efe9 100%)',
-  'local': 'linear-gradient(135deg, #93a5cf 0%, #e4efe9 100%)',
-  'educacao': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-  'brasil': 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
-  'turismo': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-  'transporte': 'linear-gradient(135deg, #536976 0%, #292E49 100%)',
-  'default': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+  'politica': 'linear-gradient(135deg, #C62828 0%, #E53935 100%)',
+  'economia': 'linear-gradient(135deg, #1B5E20 0%, #43A047 100%)',
+  'esportes': 'linear-gradient(135deg, #E65100 0%, #FF6D00 100%)',
+  'tecnologia': 'linear-gradient(135deg, #01579B 0%, #0288D1 100%)',
+  'mundo': 'linear-gradient(135deg, #1A237E 0%, #3949AB 100%)',
+  'entretenimento': 'linear-gradient(135deg, #6A1B9A 0%, #AB47BC 100%)',
+  'musica': 'linear-gradient(135deg, #AD1457 0%, #EC407A 100%)',
+  'ciencia': 'linear-gradient(135deg, #4527A0 0%, #7E57C2 100%)',
+  'saude': 'linear-gradient(135deg, #00695C 0%, #26A69A 100%)',
+  'cidade': 'linear-gradient(135deg, #37474F 0%, #607D8B 100%)',
+  'local': 'linear-gradient(135deg, #37474F 0%, #607D8B 100%)',
+  'educacao': 'linear-gradient(135deg, #F57F17 0%, #FFCA28 100%)',
+  'brasil': 'linear-gradient(135deg, #00695C 0%, #4CAF50 100%)',
+  'turismo': 'linear-gradient(135deg, #006064 0%, #00ACC1 100%)',
+  'transporte': 'linear-gradient(135deg, #263238 0%, #455A64 100%)',
+  'default': 'linear-gradient(135deg, #1A1A1A 0%, #424242 100%)'
 };
 
 export const CATEGORY_LABELS = {

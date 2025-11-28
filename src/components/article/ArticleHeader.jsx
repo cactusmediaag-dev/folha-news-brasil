@@ -1,7 +1,7 @@
 import React from "react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { Eye, Clock, Facebook, Twitter } from "lucide-react";
+import { Clock, Facebook, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // WhatsApp icon component
@@ -40,15 +40,16 @@ export default function ArticleHeader({ post }) {
   };
 
   return (
-    <header className="max-w-[1140px] mx-auto px-4 py-10 sm:py-14">
-      {/* Title - Elegant */}
+    <header className="max-w-[1200px] mx-auto px-4 py-10 sm:py-14">
+      {/* Title - Elegant with more breathing room */}
       <h1 
-        className="text-2xl sm:text-3xl lg:text-[2.5rem] font-bold leading-[1.2] mb-6"
+        className="text-2xl sm:text-3xl lg:text-[2.5rem] font-bold mb-7"
         style={{ 
           fontFamily: "'Overpass', sans-serif",
           fontWeight: 700,
           letterSpacing: '-0.5px',
-          color: '#1A202C'
+          color: '#1A202C',
+          lineHeight: '1.25'
         }}
       >
         {post.title}
@@ -81,12 +82,8 @@ export default function ArticleHeader({ post }) {
 
       {/* Stats & Share Row */}
       <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-t border-b border-gray-200">
-        {/* Stats Badges */}
+        {/* Reading Time Badge (removed views counter) */}
         <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-sm text-gray-600">
-            <Eye className="w-4 h-4" />
-            {(post.views_count || 0).toLocaleString()} views
-          </span>
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-sm text-gray-600">
             <Clock className="w-4 h-4" />
             {readingTime} min de leitura
