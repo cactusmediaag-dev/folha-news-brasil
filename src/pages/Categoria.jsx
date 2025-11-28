@@ -252,13 +252,16 @@ export default function Categoria() {
       </div>
       {/* Fim do Container Mestre */}
 
-      {/* Estilos do Container Mestre */}
+      {/* Estilos do Container Mestre - Lock CSS */}
       <style>{`
+        /* Container Mestre que segura TUDO no centro */
         .category-page-wrapper {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 30px 20px 40px;
-          width: 100%;
+          max-width: 1200px !important;
+          width: 100% !important;
+          margin: 0 auto !important;
+          padding: 30px 20px 40px !important;
+          box-sizing: border-box !important;
+          overflow-x: hidden !important;
           display: flex;
           flex-direction: column;
           gap: 40px;
@@ -269,6 +272,8 @@ export default function Categoria() {
           grid-template-columns: 2fr 1fr;
           gap: 20px;
           height: 450px;
+          width: 100% !important;
+          max-width: 100% !important;
         }
 
         .hero-main-card {
@@ -287,21 +292,34 @@ export default function Categoria() {
           min-height: 0;
         }
 
+        /* O Slot do Banner - TRAVADO */
         .category-ads-container {
-          width: 100%;
+          width: 100% !important;
+          max-width: 100% !important;
+          background-color: #E2E8F0;
+          border-radius: 8px;
+          padding: 20px 0;
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #F8F9FA;
-          border-radius: 8px;
-          overflow: hidden;
-          min-height: 100px;
+          overflow: hidden !important;
+          box-sizing: border-box !important;
+        }
+
+        /* Prevenção de redimensionamento forçado pelo AdSense/Google */
+        .category-ads-container iframe,
+        .category-ads-container div,
+        .category-ads-container section,
+        .category-ads-container img {
+          max-width: 100% !important;
+          box-sizing: border-box !important;
         }
 
         .category-ads-container > section {
           background: transparent !important;
           padding: 0 !important;
-          width: 100%;
+          width: 100% !important;
+          max-width: 100% !important;
         }
 
         .category-ads-container > section > div {
@@ -309,10 +327,16 @@ export default function Categoria() {
           max-width: 100% !important;
         }
 
+        /* Feed Section */
+        .category-feed-section {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
+
         @media (max-width: 768px) {
           .category-page-wrapper {
-            gap: 25px;
-            padding: 20px 15px 30px;
+            gap: 25px !important;
+            padding: 20px 15px 30px !important;
           }
 
           .category-hero-grid {
@@ -333,6 +357,10 @@ export default function Categoria() {
 
           .hero-side-card {
             height: 150px !important;
+          }
+
+          .category-ads-container {
+            padding: 15px 0 !important;
           }
         }
 
