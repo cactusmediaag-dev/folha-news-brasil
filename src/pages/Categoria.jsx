@@ -385,7 +385,8 @@ export default function Categoria() {
           }
 
           .category-ads-container {
-            padding: 20px 0 !important;
+            padding: 15px 0 !important;
+            background-color: transparent !important;
           }
         }
 
