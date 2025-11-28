@@ -174,7 +174,7 @@ export default function Categoria() {
           <div className="category-feed-section">
             <h2 className="text-xl font-bold text-[#1A1A1A] mb-6">Mais Notícias</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {paginatedPosts.map((post) => (
               <Link
                 key={post.id}
