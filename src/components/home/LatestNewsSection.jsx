@@ -49,28 +49,28 @@ export default function LatestNewsSection({ posts = [] }) {
                 className="flex gap-4 group"
               >
                 {/* Thumbnail */}
-                <div className="flex-shrink-0 w-32 h-24 sm:w-40 sm:h-28 rounded-lg overflow-hidden">
-                  <img
-                    src={post.featured_image || "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=400&h=300&fit=crop"}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
+                    <div className="flex-shrink-0 w-24 h-20 sm:w-40 sm:h-28 rounded-lg overflow-hidden">
+                      <img
+                        src={post.featured_image || "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=400&h=300&fit=crop"}
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
 
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <span className="text-xs font-semibold text-[#D71E1F] uppercase">
-                    {categoryLabels[post.category] || post.category}
-                  </span>
-                  <h3 className="text-base font-bold text-[#1A1A1A] leading-snug mt-1 group-hover:text-[#D71E1F] transition-colors line-clamp-2" style={{ fontFamily: "'Overpass', sans-serif", letterSpacing: "-0.3px" }}>
-                    {post.title}
-                  </h3>
-                  {post.subtitle && (
-                    <p className="text-sm text-gray-600 mt-1 line-clamp-2 hidden sm:block">
-                      {post.subtitle}
-                    </p>
-                  )}
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <span className="text-xs font-semibold text-[#D71E1F] uppercase">
+                        {categoryLabels[post.category] || post.category}
+                      </span>
+                      <h3 className="text-sm sm:text-base font-bold text-[#1A1A1A] leading-snug mt-1 group-hover:text-[#D71E1F] transition-colors line-clamp-2" style={{ fontFamily: "'Overpass', sans-serif", letterSpacing: "-0.3px" }}>
+                        {post.title}
+                      </h3>
+                      {post.subtitle && (
+                        <p className="text-sm text-gray-600 mt-1 line-clamp-1 sm:line-clamp-2 hidden sm:block">
+                          {post.subtitle}
+                        </p>
+                      )}
                   <div className="flex items-center gap-3 mt-2 text-xs text-gray-500">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />

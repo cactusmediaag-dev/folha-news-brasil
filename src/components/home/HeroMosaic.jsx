@@ -317,16 +317,51 @@ export default function HeroMosaic({ posts = [], isLoading = false }) {
           .mosaic-grid {
             grid-template-columns: 1fr !important;
             height: auto !important;
+            gap: 12px !important;
           }
           .mosaic-main-card {
-            height: 300px !important;
+            height: 350px !important;
+            min-height: 350px !important;
+          }
+          .mosaic-main-card h1 {
+            font-size: 1.35rem !important;
+            line-height: 1.3 !important;
+            width: 95% !important;
+          }
+          .mosaic-main-card p {
+            font-size: 0.875rem !important;
+            display: none !important;
           }
           .mosaic-side-column {
             height: auto !important;
+            flex-direction: row !important;
+            gap: 12px !important;
           }
           .mosaic-side-card {
-            height: 200px !important;
-            flex: none !important;
+            height: 180px !important;
+            flex: 1 !important;
+          }
+          .mosaic-side-card h3 {
+            font-size: 0.875rem !important;
+            line-height: 1.3 !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .mosaic-main-card {
+            height: 320px !important;
+          }
+          .mosaic-main-card h1 {
+            font-size: 1.2rem !important;
+          }
+          .mosaic-side-column {
+            flex-direction: column !important;
+          }
+          .mosaic-side-card {
+            height: 160px !important;
+          }
+          .mosaic-side-card h3 {
+            font-size: 0.8rem !important;
           }
         }
       `}</style>

@@ -43,21 +43,21 @@ export default function Footer() {
         className="w-full"
         style={{ 
           backgroundColor: '#D71E1F',
-          paddingTop: '60px',
-          paddingBottom: '40px'
+          paddingTop: '40px',
+          paddingBottom: '30px'
         }}
       >
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-6 sm:gap-8">
           {/* Logo - White Version */}
           <img
             src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6925f248881ba46b069e0c80/8b8dd9df9_f_news_brasil_logo_002.png"
             alt="Folha News Brasil"
-            className="h-12 w-auto"
+            className="h-10 sm:h-12 w-auto max-w-[140px] sm:max-w-none object-contain"
             style={{ filter: 'brightness(0) invert(1)' }}
           />
 
           {/* Social Icons */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-5 sm:gap-6">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
@@ -67,13 +67,13 @@ export default function Footer() {
                 aria-label={social.label}
                 className="text-white hover:scale-110 transition-transform duration-200"
               >
-                <social.icon className="w-6 h-6" strokeWidth={1.5} />
+                <social.icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.5} />
               </a>
             ))}
           </div>
 
-          {/* Navigation Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 px-6 max-w-4xl">
+          {/* Navigation Links - Hidden on Mobile */}
+          <nav className="hidden sm:flex flex-wrap items-center justify-center gap-x-8 gap-y-3 px-6 max-w-4xl">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -94,10 +94,11 @@ export default function Footer() {
 
           {/* Copyright */}
           <p 
-            className="text-white/60 mt-4"
+            className="text-white/60 mt-4 px-5 text-center"
             style={{
               fontFamily: "'Overpass', sans-serif",
-              fontSize: '12px'
+              fontSize: '11px',
+              lineHeight: '1.5'
             }}
           >
             © 2025 Folha News Brasil — Todos os direitos reservados

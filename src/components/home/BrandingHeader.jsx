@@ -42,7 +42,7 @@ export default function BrandingHeader() {
   return (
     <header className="bg-slate-50">
       {/* Main Header - 3 Column Grid Layout */}
-      <div className="bg-zinc-50 mx-auto px-4 max-w-7xl" style={{ paddingTop: '35px', paddingBottom: '35px' }}>
+      <div className="bg-zinc-50 mx-auto px-4 max-w-7xl" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
         <div className="grid grid-cols-3 items-center">
           {/* Column 1 - Left (Explore Menu) */}
           <div className="flex items-center">
@@ -55,7 +55,7 @@ export default function BrandingHeader() {
               <img 
                 src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/6925f248881ba46b069e0c80/8b8dd9df9_f_news_brasil_logo_002.png" 
                 alt="Folha News Brasil" 
-                className="h-16 sm:h-20 w-auto"
+                className="h-10 sm:h-16 md:h-20 w-auto max-w-[150px] sm:max-w-[200px] md:max-w-none object-contain"
               />
             </a>
           </div>
