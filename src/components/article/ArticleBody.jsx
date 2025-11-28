@@ -4,22 +4,28 @@ export default function ArticleBody({ content }) {
   if (!content) return null;
 
   return (
-    <div className="max-w-[1140px] mx-auto px-4 mb-16">
-      {/* Article content with comfortable reading width */}
+    <div className="article-content-wrapper">
+      {/* Article content */}
       <div 
-        className="article-body max-w-[900px]"
+        className="article-body"
         dangerouslySetInnerHTML={{ __html: content }}
       />
 
       <style>{`
         .article-body {
-          font-size: 20px;
-          line-height: 1.75;
+          font-size: 19px;
+          line-height: 1.8;
           color: #2D3748;
         }
         
         .article-body p {
-          margin-bottom: 1.75rem;
+          text-align: justify;
+          text-justify: inter-word;
+          hyphens: none !important;
+          -webkit-hyphens: none !important;
+          -ms-hyphens: none !important;
+          margin-bottom: 20px;
+          line-height: 1.8;
         }
         
         .article-body h2 {
@@ -97,8 +103,12 @@ export default function ArticleBody({ content }) {
         
         @media (max-width: 768px) {
           .article-body {
-            font-size: 18px;
-            line-height: 1.7;
+            font-size: 17px;
+            line-height: 1.75;
+          }
+          
+          .article-body p {
+            text-align: left;
           }
           
           .article-body h2 {

@@ -11,6 +11,7 @@ import ArticleBreadcrumb from "@/components/article/ArticleBreadcrumb";
 import ArticleHeader from "@/components/article/ArticleHeader";
 import ArticleFeaturedImage from "@/components/article/ArticleFeaturedImage";
 import ArticleBody from "@/components/article/ArticleBody";
+import ArticleSidebar from "@/components/article/ArticleSidebar";
 import RelatedPosts from "@/components/article/RelatedPosts";
 import FloatingWhatsApp from "@/components/article/FloatingWhatsApp";
 
@@ -149,8 +150,22 @@ export default function Noticia() {
             </div>
           )}
 
-          {/* Article Body */}
-          <ArticleBody content={post.body} />
+          {/* 2-Column Grid: Sidebar Left + Content Right */}
+          <div className="max-w-[1280px] mx-auto px-4 mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-10">
+              {/* Left Sidebar */}
+              <div className="order-2 md:order-1">
+                <div className="sticky top-4">
+                  <ArticleSidebar />
+                </div>
+              </div>
+
+              {/* Right Content */}
+              <div className="order-1 md:order-2">
+                <ArticleBody content={post.body} />
+              </div>
+            </div>
+          </div>
         </article>
 
         {/* Related Posts */}
