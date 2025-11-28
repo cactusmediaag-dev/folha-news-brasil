@@ -51,10 +51,11 @@ export default function Categoria() {
       <TopBar />
       <BrandingHeader />
 
-      {/* Barra de Identidade - Boxed Gradient Card */}
-      <section className="max-w-7xl mx-auto px-4" style={{ marginTop: '30px', marginBottom: '10px' }}>
+      {/* Container Mestre - Alinhamento Global */}
+      <div className="category-page-wrapper">
+        {/* Barra de Identidade - Boxed Gradient Card */}
         <div
-          className="flex items-center"
+          className="category-identity-bar flex items-center"
           style={{
             background: categoryGradient,
             borderRadius: '12px',
@@ -73,10 +74,9 @@ export default function Categoria() {
             </h1>
           </div>
         </div>
-      </section>
 
-      {/* Category Hero - Top 3 Posts */}
-      <section className="max-w-7xl mx-auto px-4 py-8">
+        {/* Category Hero - Top 3 Posts */}
+        <div className="category-hero-section">
         {isLoading ? (
           <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-5 h-[450px]">
             <div className="bg-gray-200 rounded-xl animate-pulse" />
