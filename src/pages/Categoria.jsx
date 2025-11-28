@@ -306,7 +306,7 @@ export default function Categoria() {
           position: relative !important;
         }
 
-        /* O Slot do Banner - Fluxo normal, sem overlap */
+        /* O Slot do Banner - Transparente e limpo */
         .category-ads-container {
           position: relative !important;
           top: auto !important;
@@ -315,9 +315,12 @@ export default function Categoria() {
           z-index: 1;
           width: 100% !important;
           max-width: 100% !important;
-          background-color: #E2E8F0;
-          border-radius: 8px;
-          padding: 30px 0;
+          background-color: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          border-radius: 0;
+          padding: 30px 0 !important;
+          margin: 0 auto !important;
           display: flex;
           justify-content: center;
           align-items: center;
