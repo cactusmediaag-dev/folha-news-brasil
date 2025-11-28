@@ -12,6 +12,7 @@ import InlineAdBanner from "@/components/home/InlineAdBanner";
 import CidadesSection from "@/components/home/CidadesSection";
 import EntertainmentWorldSection from "@/components/home/EntertainmentWorldSection";
 import SportsSection from "@/components/home/SportsSection";
+import TripleNewsGrid from "@/components/home/TripleNewsGrid";
 import Footer from "@/components/home/Footer";
 
 export default function Home() {
@@ -60,6 +61,9 @@ export default function Home() {
 
       {/* Esportes + Brasileirão - Sessão 6 */}
       <SportsSection />
+
+      {/* Triple News Grid - Nacional, Economia, Saúde - Sessão 7 */}
+      <TripleNewsGrid />
 
       {/* Footer */}
       <Footer />
