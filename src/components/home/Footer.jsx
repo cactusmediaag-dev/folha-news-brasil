@@ -92,6 +92,31 @@ export default function Footer() {
             ))}
           </nav>
 
+          {/* Legal Links */}
+          <div className="flex items-center gap-4 mt-2">
+            <a
+              href="/Privacidade"
+              className="text-white/70 hover:text-white hover:underline transition-all"
+              style={{
+                fontFamily: "'Overpass', sans-serif",
+                fontSize: '13px',
+              }}
+            >
+              Política de Privacidade
+            </a>
+            <span className="text-white/40">•</span>
+            <a
+              href="/Privacidade"
+              className="text-white/70 hover:text-white hover:underline transition-all"
+              style={{
+                fontFamily: "'Overpass', sans-serif",
+                fontSize: '13px',
+              }}
+            >
+              Termos de Uso
+            </a>
+          </div>
+
           {/* Copyright */}
           <p 
             className="text-white/60 mt-4 px-5 text-center"
