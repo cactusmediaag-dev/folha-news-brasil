@@ -247,8 +247,105 @@ export default function Categoria() {
               </Button>
             </div>
           )}
-        </section>
-      )}
+          </div>
+        )}
+      </div>
+      {/* Fim do Container Mestre */}
+
+      {/* Estilos do Container Mestre */}
+      <style>{`
+        .category-page-wrapper {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 30px 20px 40px;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+        }
+
+        .category-hero-grid {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap: 20px;
+          height: 450px;
+        }
+
+        .hero-main-card {
+          height: 100%;
+        }
+
+        .hero-side-column {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          height: 100%;
+        }
+
+        .hero-side-card {
+          flex: 1;
+          min-height: 0;
+        }
+
+        .category-ads-container {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #F8F9FA;
+          border-radius: 8px;
+          overflow: hidden;
+          min-height: 100px;
+        }
+
+        .category-ads-container > section {
+          background: transparent !important;
+          padding: 0 !important;
+          width: 100%;
+        }
+
+        .category-ads-container > section > div {
+          padding: 0 !important;
+          max-width: 100% !important;
+        }
+
+        @media (max-width: 768px) {
+          .category-page-wrapper {
+            gap: 25px;
+            padding: 20px 15px 30px;
+          }
+
+          .category-hero-grid {
+            grid-template-columns: 1fr;
+            height: auto;
+          }
+
+          .hero-main-card {
+            height: 250px !important;
+          }
+
+          .hero-side-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            height: auto;
+          }
+
+          .hero-side-card {
+            height: 150px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-side-column {
+            grid-template-columns: 1fr;
+          }
+
+          .hero-side-card {
+            height: 180px !important;
+          }
+        }
+      `}</style>
 
       {/* Footer */}
       <Footer />
