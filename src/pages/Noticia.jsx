@@ -150,19 +150,19 @@ export default function Noticia() {
             </div>
           )}
 
-          {/* 2-Column Grid: Sidebar Left + Content Right */}
-          <div className="max-w-[1280px] mx-auto px-4 mb-16">
-            <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-10">
-              {/* Left Sidebar */}
-              <div className="order-2 md:order-1">
-                <div className="sticky top-4">
-                  <ArticleSidebar />
-                </div>
+          {/* 2-Column Grid: Content Left + Sidebar Right */}
+          <div className="max-w-[1200px] mx-auto px-4 pb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10">
+              {/* Left Content (comes first in HTML for SEO) */}
+              <div>
+                <ArticleBody content={post.body} />
               </div>
 
-              {/* Right Content */}
-              <div className="order-1 md:order-2">
-                <ArticleBody content={post.body} />
+              {/* Right Sidebar */}
+              <div className="lg:block">
+                <div className="sticky top-5">
+                  <ArticleSidebar />
+                </div>
               </div>
             </div>
           </div>
