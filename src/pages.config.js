@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import Noticia from './pages/Noticia';
 import Categoria from './pages/Categoria';
 import WebStories from './pages/WebStories';
+import Privacidade from './pages/Privacidade';
 import __Layout from './Layout.jsx';
 
 
@@ -28,6 +29,7 @@ export const PAGES = {
     "Noticia": Noticia,
     "Categoria": Categoria,
     "WebStories": WebStories,
+    "Privacidade": Privacidade,
 }
 
 export const pagesConfig = {
