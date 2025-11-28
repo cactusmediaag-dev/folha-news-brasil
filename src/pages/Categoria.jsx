@@ -216,26 +216,26 @@ export default function Categoria() {
             {/* Pagination */}
             {totalPages > 1 && (
               <div className="flex items-center justify-center gap-2 mt-10">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                disabled={currentPage === 1}
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </Button>
-              
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                 <Button
-                  key={page}
-                  variant={currentPage === page ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => setCurrentPage(page)}
-                  className={currentPage === page ? "bg-[#D71E1F] hover:bg-[#b91c1c]" : ""}
+                  variant="outline"
+                  size="icon"
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
                 >
-                  {page}
+                  <ChevronLeft className="w-4 h-4" />
                 </Button>
-              ))}
+              
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <Button
+                    key={page}
+                    variant={currentPage === page ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setCurrentPage(page)}
+                    className={currentPage === page ? "bg-[#D71E1F] hover:bg-[#b91c1c]" : ""}
+                  >
+                    {page}
+                  </Button>
+                ))}
               
                 <Button
                   variant="outline"
