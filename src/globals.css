@@ -51,7 +51,12 @@ p, span, a, li, div, button, input, textarea, select, label,
 html, body {
   font-family: 'Overpass', sans-serif !important;
   color: var(--text-body);
-  background-color: var(--white);
+  background-color: #F9FAFB !important;
+}
+
+/* Fundo global uniforme */
+#root, .main-wrapper {
+  background-color: #F9FAFB !important;
 }
 
 /* Headlines - Epic Look */
