@@ -252,9 +252,9 @@ export default function Categoria() {
       </div>
       {/* Fim do Container Mestre */}
 
-      {/* Estilos do Container Mestre - Lock CSS */}
+      {/* Estilos do Container Mestre - Lock CSS + Flex Column Flow */}
       <style>{`
-        /* Container Mestre que segura TUDO no centro */
+        /* Container Mestre - Flex Column para empilhar blocos */
         .category-page-wrapper {
           max-width: 1200px !important;
           width: 100% !important;
@@ -262,43 +262,62 @@ export default function Categoria() {
           padding: 30px 20px 40px !important;
           box-sizing: border-box !important;
           overflow-x: hidden !important;
-          display: flex;
-          flex-direction: column;
-          gap: 40px;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 50px !important;
+          height: auto !important;
+          overflow: visible !important;
+        }
+
+        /* Hero Section - Altura automática, não fixa */
+        .category-hero-section {
+          width: 100% !important;
+          height: auto !important;
+          position: relative !important;
+          z-index: 2;
+          margin-bottom: 0 !important;
         }
 
         .category-hero-grid {
           display: grid;
           grid-template-columns: 2fr 1fr;
           gap: 20px;
-          height: 450px;
+          height: auto !important;
+          min-height: 450px;
           width: 100% !important;
           max-width: 100% !important;
         }
 
         .hero-main-card {
-          height: 100%;
+          height: 450px;
+          position: relative !important;
         }
 
         .hero-side-column {
           display: flex;
           flex-direction: column;
           gap: 20px;
-          height: 100%;
+          height: 450px;
         }
 
         .hero-side-card {
           flex: 1;
           min-height: 0;
+          position: relative !important;
         }
 
-        /* O Slot do Banner - TRAVADO */
+        /* O Slot do Banner - Fluxo normal, sem overlap */
         .category-ads-container {
+          position: relative !important;
+          top: auto !important;
+          margin-top: 0 !important;
+          transform: none !important;
+          z-index: 1;
           width: 100% !important;
           max-width: 100% !important;
           background-color: #E2E8F0;
           border-radius: 8px;
-          padding: 20px 0;
+          padding: 30px 0;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -331,17 +350,20 @@ export default function Categoria() {
         .category-feed-section {
           width: 100% !important;
           max-width: 100% !important;
+          position: relative !important;
+          z-index: 1;
         }
 
         @media (max-width: 768px) {
           .category-page-wrapper {
-            gap: 25px !important;
+            gap: 30px !important;
             padding: 20px 15px 30px !important;
           }
 
           .category-hero-grid {
             grid-template-columns: 1fr;
-            height: auto;
+            height: auto !important;
+            min-height: auto !important;
           }
 
           .hero-main-card {
@@ -352,7 +374,7 @@ export default function Categoria() {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            height: auto;
+            height: auto !important;
           }
 
           .hero-side-card {
@@ -360,7 +382,7 @@ export default function Categoria() {
           }
 
           .category-ads-container {
-            padding: 15px 0 !important;
+            padding: 20px 0 !important;
           }
         }
 
