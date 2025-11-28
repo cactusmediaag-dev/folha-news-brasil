@@ -18,7 +18,7 @@ export default function CidadesSection() {
 
   if (isLoading) {
     return (
-      <section className="bg-white py-10 border-b border-gray-100">
+      <section className="py-10" style={{ backgroundColor: 'transparent' }}>
         <div className="max-w-7xl mx-auto px-4">
           {/* Header Skeleton */}
           <div className="h-14 bg-gray-200 rounded-lg animate-pulse mb-8" />
@@ -44,7 +44,7 @@ export default function CidadesSection() {
   if (posts.length === 0) return null;
 
   return (
-    <section className="bg-white py-10 border-b border-gray-100">
+    <section className="py-10" style={{ backgroundColor: 'transparent' }}>
       <div className="max-w-7xl mx-auto px-4">
         {/* Boxed Header */}
         <div

@@ -29,7 +29,7 @@ export default function LatestNewsSection({ posts = [] }) {
   }
 
   return (
-    <section className="py-10 bg-white">
+    <section className="py-10" style={{ backgroundColor: 'transparent' }}>
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
         <div className="mb-8">
