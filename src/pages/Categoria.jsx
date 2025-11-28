@@ -211,11 +211,11 @@ export default function Categoria() {
                 </div>
               </Link>
             ))}
-          </div>
+            </div>
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-10">
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-10">
               <Button
                 variant="outline"
                 size="icon"
