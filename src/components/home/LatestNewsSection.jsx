@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Clock, Eye } from "lucide-react";
+import { Clock } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import WeatherWidget from "./WeatherWidget";
@@ -48,8 +48,8 @@ export default function LatestNewsSection({ posts = [] }) {
                 to={`${createPageUrl("Noticia")}?slug=${post.slug}`}
                 className="flex gap-4 group"
               >
-                {/* Thumbnail */}
-                    <div className="flex-shrink-0 w-24 h-20 sm:w-40 sm:h-28 rounded-lg overflow-hidden">
+                {/* Thumbnail - Compact on mobile */}
+                    <div className="flex-shrink-0 w-[90px] h-[70px] sm:w-40 sm:h-28 rounded-md sm:rounded-lg overflow-hidden">
                       <img
                         src={post.featured_image || "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=400&h=300&fit=crop"}
                         alt={post.title}
@@ -58,32 +58,26 @@ export default function LatestNewsSection({ posts = [] }) {
                       />
                     </div>
 
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <span className="text-xs font-semibold text-[#D71E1F] uppercase">
+                    {/* Content - Priority on mobile */}
+                    <div className="flex-1 min-w-0 flex flex-col justify-center">
+                      <span className="text-[10px] sm:text-xs font-semibold text-[#D71E1F] uppercase">
                         {categoryLabels[post.category] || post.category}
                       </span>
-                      <h3 className="text-sm sm:text-base font-bold text-[#1A1A1A] leading-snug mt-1 group-hover:text-[#D71E1F] transition-colors line-clamp-2" style={{ fontFamily: "'Overpass', sans-serif", letterSpacing: "-0.3px" }}>
+                      <h3 className="text-[15px] sm:text-base font-bold text-[#1A1A1A] leading-[1.3] mt-1 group-hover:text-[#D71E1F] transition-colors line-clamp-3 sm:line-clamp-2" style={{ fontFamily: "'Overpass', sans-serif", letterSpacing: "-0.3px" }}>
                         {post.title}
                       </h3>
                       {post.subtitle && (
-                        <p className="text-sm text-gray-600 mt-1 line-clamp-1 sm:line-clamp-2 hidden sm:block">
+                        <p className="text-sm text-gray-600 mt-1 line-clamp-2 hidden sm:block">
                           {post.subtitle}
                         </p>
                       )}
-                  <div className="flex items-center gap-3 mt-2 text-xs text-gray-500">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {format(new Date(post.publish_date || post.created_date), "dd/MM/yyyy", { locale: ptBR })}
-                    </span>
-                    {post.views_count > 0 && (
-                      <span className="flex items-center gap-1">
-                        <Eye className="w-3 h-3" />
-                        {post.views_count}
-                      </span>
-                    )}
-                  </div>
-                </div>
+                      <div className="flex items-center gap-3 mt-1.5 sm:mt-2 text-[11px] sm:text-xs text-gray-500">
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {format(new Date(post.publish_date || post.created_date), "dd/MM/yyyy", { locale: ptBR })}
+                        </span>
+                      </div>
+                    </div>
               </Link>
             ))}
           </div>
