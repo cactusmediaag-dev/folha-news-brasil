@@ -19,7 +19,7 @@ export default function InlineAdBanner() {
   };
 
   return (
-    <section className="py-8 bg-gray-100 inline-ad-section">
+    <section className="py-8 inline-ad-section" style={{ backgroundColor: 'transparent' }}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="relative rounded-xl overflow-hidden bg-gradient-to-r from-gray-200 to-gray-300 h-[120px] sm:h-[150px] flex items-center justify-center">
           {activeBanner ? (
