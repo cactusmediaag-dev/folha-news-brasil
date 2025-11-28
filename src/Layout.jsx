@@ -64,8 +64,12 @@ export default function Layout({ children, currentPageName }) {
     navigate(createPageUrl("Painel"));
   };
 
-  // Hide layout on login page, public home and article page
-  if (currentPageName === "Painel" || currentPageName === "Home" || currentPageName === "Noticia" || currentPageName === "Categoria") {
+  // Define admin pages that should show the admin layout
+  const adminPages = ["Dashboard", "Posts", "PostEditor", "WebStories", "Banners", "WebPush", "Team", "Settings"];
+  const isAdminPage = adminPages.includes(currentPageName);
+
+  // Public pages: render children without admin layout
+  if (!isAdminPage) {
     return <>{children}</>;
   }
 
