@@ -80,7 +80,7 @@ export default function HeroMosaic({ posts = [], isLoading = false }) {
   const sidePost2 = displayPosts[2];
 
   return (
-    <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 16px' }}>
+    <section className="site-container" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
       {/* CSS Grid Container */}
       <div className="mosaic-grid" style={{
         display: 'grid',
