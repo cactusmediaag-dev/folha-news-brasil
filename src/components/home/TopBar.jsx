@@ -29,8 +29,8 @@ export default function TopBar() {
   }, []);
 
   return (
-    <div className="bg-[#D71E1F] text-white py-2">
-      <div className="site-container flex flex-wrap items-center justify-between gap-2">
+    <div className="bg-[#D71E1F] text-white py-2 px-4">
+      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
         {/* Date */}
         <div className="text-sm font-light hidden sm:block">
           {capitalizedDate}

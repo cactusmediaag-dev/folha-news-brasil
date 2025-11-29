@@ -183,7 +183,7 @@ function CategoryColumn({ category, label, color }) {
 export default function TripleNewsGrid() {
   return (
     <section className="py-12" style={{ backgroundColor: 'transparent' }}>
-      <div className="site-container">
+      <div className="max-w-7xl mx-auto px-4">
         {/* 3-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
           {categories.map((cat) => (

@@ -102,7 +102,7 @@ export default function WebStoriesCarousel() {
   return (
     <>
       <section className="py-8" id="webstories" style={{ backgroundColor: 'transparent' }}>
-        <div className="site-container">
+        <div className="max-w-7xl mx-auto px-4">
           {/* Section Header */}
           <div className="flex items-center justify-between mb-6">
             <div>
