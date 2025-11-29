@@ -22,7 +22,7 @@ export default function HeaderAdBanner() {
 
   return (
     <section className="py-4 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="site-container">
         <div className="flex justify-center">
           {activeBanner?.image_url ? (
             <a

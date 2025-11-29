@@ -53,7 +53,8 @@ export default function EntertainmentWorldSection() {
   };
 
   return (
-    <section className="mt-12 site-container">
+    <section className="py-12" style={{ backgroundColor: 'transparent' }}>
+      <div className="site-container">
       <div className="grid grid-cols-1 lg:grid-cols-[2.5fr_1fr] gap-8">
         
         {/* Left Column - Entertainment Slider */}
@@ -196,6 +197,7 @@ export default function EntertainmentWorldSection() {
             )}
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

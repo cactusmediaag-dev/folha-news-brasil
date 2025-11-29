@@ -46,7 +46,7 @@ export default function SportsSection() {
 
   return (
     <section 
-      className="w-full py-14"
+      className="py-14"
       style={{ background: "linear-gradient(135deg, #F2994A 0%, #F2C94C 100%)" }}
     >
       <div className="site-container">
