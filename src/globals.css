@@ -59,6 +59,17 @@ html, body {
   background-color: #F9FAFB !important;
 }
 
+/* Container Mestre - Golden Ruler */
+.site-container {
+  max-width: 1280px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  box-sizing: border-box !important;
+}
+
 /* Headlines - Epic Look */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Overpass', sans-serif !important;
