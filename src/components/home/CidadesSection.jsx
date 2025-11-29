@@ -45,7 +45,7 @@ export default function CidadesSection() {
 
   return (
     <section className="py-10" style={{ backgroundColor: 'transparent' }}>
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="site-container">
         {/* Boxed Header */}
         <div
           className="rounded-lg px-6 py-3 flex items-center justify-between mb-8"
