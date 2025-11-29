@@ -30,7 +30,7 @@ export default function LatestNewsSection({ posts = [] }) {
 
   return (
     <section className="py-10" style={{ backgroundColor: 'transparent' }}>
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="site-container">
         {/* Section Header */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-[#1A1A1A]">Últimas Notícias</h2>

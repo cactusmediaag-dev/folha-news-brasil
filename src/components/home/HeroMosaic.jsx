@@ -49,7 +49,7 @@ export default function HeroMosaic({ posts = [], isLoading = false }) {
   // Loading skeleton ou sem destaques suficientes
   if (isLoading || displayPosts.length < 3) {
     return (
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 16px' }}>
+      <section className="site-container" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: '2fr 1fr',

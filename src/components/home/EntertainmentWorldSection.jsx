@@ -53,7 +53,7 @@ export default function EntertainmentWorldSection() {
   };
 
   return (
-    <section className="mt-12 max-w-7xl mx-auto px-4">
+    <section className="mt-12 site-container">
       <div className="grid grid-cols-1 lg:grid-cols-[2.5fr_1fr] gap-8">
         
         {/* Left Column - Entertainment Slider */}

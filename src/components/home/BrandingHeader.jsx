@@ -42,7 +42,7 @@ export default function BrandingHeader() {
   return (
     <header className="bg-slate-50">
       {/* Main Header - 3 Column Grid Layout */}
-      <div className="bg-zinc-50 mx-auto px-4 max-w-7xl" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+      <div className="site-container bg-zinc-50" style={{ paddingTop: '20px', paddingBottom: '20px' }}>
         <div className="grid grid-cols-3 items-center">
           {/* Column 1 - Left (Explore Menu) */}
           <div className="flex items-center">
@@ -95,7 +95,7 @@ export default function BrandingHeader() {
 
       {/* Navigation */}
       <nav className="bg-white border-t border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="site-container">
           <ul className="hidden lg:flex items-center justify-center" style={{ gap: '25px' }}>
             {navItems.map((item, index) =>
             <li key={`${item.name}-${index}`}>
