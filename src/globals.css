@@ -38,6 +38,19 @@
   --radius: 0.5rem;
 }
 
+/* ========================================
+   CONTAINER MESTRE - A RÉGUA DO SITE
+   ======================================== */
+.site-container {
+  max-width: 1280px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  box-sizing: border-box !important;
+}
+
 /* MARRETA CSS - Force Overpass em TODOS os elementos */
 body, 
 h1, h2, h3, h4, h5, h6, 
@@ -57,17 +70,6 @@ html, body {
 /* Fundo global uniforme */
 #root, .main-wrapper {
   background-color: #F9FAFB !important;
-}
-
-/* Container Mestre - Golden Ruler */
-.site-container {
-  max-width: 1280px !important;
-  width: 100% !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 20px !important;
-  padding-right: 20px !important;
-  box-sizing: border-box !important;
 }
 
 /* Headlines - Epic Look */
