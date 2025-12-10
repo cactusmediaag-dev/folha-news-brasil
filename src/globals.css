@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* FORÇAR OVERPASS EM TUDO - OVERRIDE GLOBAL */
+/* FORÇAR INTER EM TUDO - OVERRIDE GLOBAL */
 :root {
-  --font-main: 'Overpass', sans-serif;
-  --font-primary: 'Overpass', sans-serif;
+  --font-main: 'Inter', sans-serif;
+  --font-primary: 'Inter', sans-serif;
   --primary-color: #D71E1F;
   --secondary-color: #DADADA;
   --text-primary: #1A1A1A;
@@ -38,20 +38,22 @@
   --radius: 0.5rem;
 }
 
-/* MARRETA CSS - Force Overpass em TODOS os elementos */
+/* MARRETA CSS - Force Inter em TODOS os elementos */
 body, 
 h1, h2, h3, h4, h5, h6, 
 p, span, a, li, div, button, input, textarea, select, label,
 *, *::before, *::after {
-  font-family: 'Overpass', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 html, body {
-  font-family: 'Overpass', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   color: var(--text-body);
   background-color: #F9FAFB !important;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* Fundo global uniforme */
@@ -61,7 +63,7 @@ html, body {
 
 /* Headlines - Epic Look */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Overpass', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   font-weight: 700 !important;
   color: var(--text-primary);
   line-height: 1.15;
@@ -79,18 +81,18 @@ h3 {
 
 /* Body text */
 p, span, a, li {
-  font-family: 'Overpass', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   font-weight: 400;
 }
 
 /* Buttons */
 button {
-  font-family: 'Overpass', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
   font-weight: 600;
 }
 
 input, textarea, select {
-  font-family: 'Overpass', sans-serif !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 /* Custom scrollbar */
