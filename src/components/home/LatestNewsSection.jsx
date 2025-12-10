@@ -28,7 +28,7 @@ export default function LatestNewsSection({ posts = [] }) {
   // Exclude first 3 (used in Hero)
   const availablePosts = posts.slice(3);
   
-  const ultimasNoticias = availablePosts.slice(0, 5);      // Col 1: 5 posts
+  const ultimasNoticias = availablePosts.slice(0, 6);      // Col 1: 6 posts
   const folhaDestaque = availablePosts.slice(5, 10);       // Col 2: 5 posts (1 hero + 4 mini)
   const leiaTambem = availablePosts.slice(10, 14);         // Col 3: 4 posts
 
