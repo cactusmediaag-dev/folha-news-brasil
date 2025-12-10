@@ -32,22 +32,24 @@ const categoryColors = {
 };
 
 export default function HeroMosaic({ posts = [], isLoading = false }) {
-  // REGRA: Apenas notícias com is_featured = true
+  // REGRA: Priorizar notícias com is_featured = true
   const featuredPosts = posts
     .filter(p => p.is_featured === true)
     .sort((a, b) => new Date(b.publish_date || b.created_date) - new Date(a.publish_date || a.created_date))
-    .slice(0, 3); // Exatamente 3 posts
+    .slice(0, 3);
 
-  // Não preencher com posts regulares - apenas destaques
-  const displayPosts = featuredPosts;
-
-  // Log para debug se não houver destaques suficientes
-  if (featuredPosts.length < 3) {
-    console.warn(`[HeroMosaic] Apenas ${featuredPosts.length} notícias marcadas como destaque. Necessário: 3`);
+  // FALLBACK: Se não houver 3 destaques, completar com posts recentes
+  let displayPosts = [...featuredPosts];
+  if (displayPosts.length < 3 && posts.length > 0) {
+    const regularPosts = posts
+      .filter(p => !p.is_featured)
+      .slice(0, 3 - displayPosts.length);
+    displayPosts = [...displayPosts, ...regularPosts];
+    console.warn(`[HeroMosaic] Usando ${regularPosts.length} posts regulares como fallback`);
   }
 
-  // Loading skeleton ou sem destaques suficientes
-  if (isLoading || displayPosts.length < 3) {
+  // Loading skeleton apenas se estiver carregando E não tiver posts
+  if (isLoading && posts.length === 0) {
     return (
       <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 16px' }}>
         <div style={{
@@ -73,6 +75,16 @@ export default function HeroMosaic({ posts = [], isLoading = false }) {
         </div>
       </section>
     );
+  }
+
+  // Se não tiver nenhum post após loading, não renderizar nada
+  if (!isLoading && displayPosts.length === 0) {
+    return null;
+  }
+
+  // Se não tiver 3 posts, não renderizar (evitar erros)
+  if (displayPosts.length < 3) {
+    return null;
   }
 
   const mainPost = displayPosts[0];

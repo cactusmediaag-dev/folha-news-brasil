@@ -18,9 +18,18 @@ import Footer from "@/components/home/Footer";
 export default function Home() {
   const { data: posts = [], isLoading, error } = useQuery({
     queryKey: ['public-posts'],
-    queryFn: () => base44.entities.Post.filter({ status: 'published' }, '-publish_date', 30),
+    queryFn: async () => {
+      try {
+        const result = await base44.entities.Post.filter({ status: 'published' }, '-publish_date', 30);
+        return result || [];
+      } catch (err) {
+        console.error('Erro ao carregar posts:', err);
+        return [];
+      }
+    },
     staleTime: 0,
     refetchOnMount: true,
+    retry: 2,
   });
 
   // Sort by featured first, then by date
