@@ -50,15 +50,29 @@ export default function Noticia() {
     if (post) {
       const currentUrl = window.location.href;
       const imageUrl = post.featured_image || 'https://folhanewsbrasil.com.br/logo.png';
-      const description = post.meta_description || post.subtitle || post.title;
       
-      // Remove existing OG tags
-      const existingOgTags = document.querySelectorAll('meta[property^="og:"]');
-      existingOgTags.forEach(tag => tag.remove());
+      // Smart fallback for description
+      let description = post.meta_description || post.subtitle;
+      if (!description && post.body) {
+        // Extract first 150 chars from body, strip HTML tags
+        const textContent = post.body.replace(/<[^>]*>/g, '').trim();
+        description = textContent.substring(0, 150) + '...';
+      }
+      // Ensure max 200 chars
+      if (description && description.length > 200) {
+        description = description.substring(0, 197) + '...';
+      }
+      
+      // Title with branding
+      const ogTitle = `${post.title} | Folha News Brasil`;
+      
+      // Remove existing meta tags
+      const existingTags = document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]');
+      existingTags.forEach(tag => tag.remove());
 
-      // Create and inject new OG tags
-      const ogTags = [
-        { property: 'og:title', content: post.title },
+      // Open Graph tags
+      const metaTags = [
+        { property: 'og:title', content: ogTitle },
         { property: 'og:description', content: description },
         { property: 'og:image', content: imageUrl },
         { property: 'og:image:width', content: '1200' },
@@ -66,21 +80,26 @@ export default function Noticia() {
         { property: 'og:url', content: currentUrl },
         { property: 'og:type', content: 'article' },
         { property: 'og:site_name', content: 'Folha News Brasil' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: ogTitle },
+        { name: 'twitter:description', content: description },
+        { name: 'twitter:image', content: imageUrl },
       ];
 
-      ogTags.forEach(tag => {
+      metaTags.forEach(tag => {
         const meta = document.createElement('meta');
-        meta.setAttribute('property', tag.property);
+        if (tag.property) meta.setAttribute('property', tag.property);
+        if (tag.name) meta.setAttribute('name', tag.name);
         meta.setAttribute('content', tag.content);
         document.head.appendChild(meta);
       });
 
       // Update document title
-      document.title = `${post.title} - Folha News Brasil`;
+      document.title = ogTitle;
 
       // Cleanup on unmount
       return () => {
-        const tags = document.querySelectorAll('meta[property^="og:"]');
+        const tags = document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]');
         tags.forEach(tag => tag.remove());
       };
     }
