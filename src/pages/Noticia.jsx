@@ -45,6 +45,47 @@ export default function Noticia() {
     }
   }, [post?.id]);
 
+  // Dynamic Open Graph meta tags for WhatsApp/Telegram sharing
+  useEffect(() => {
+    if (post) {
+      const currentUrl = window.location.href;
+      const imageUrl = post.featured_image || 'https://folhanewsbrasil.com.br/logo.png';
+      const description = post.meta_description || post.subtitle || post.title;
+      
+      // Remove existing OG tags
+      const existingOgTags = document.querySelectorAll('meta[property^="og:"]');
+      existingOgTags.forEach(tag => tag.remove());
+
+      // Create and inject new OG tags
+      const ogTags = [
+        { property: 'og:title', content: post.title },
+        { property: 'og:description', content: description },
+        { property: 'og:image', content: imageUrl },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:url', content: currentUrl },
+        { property: 'og:type', content: 'article' },
+        { property: 'og:site_name', content: 'Folha News Brasil' },
+      ];
+
+      ogTags.forEach(tag => {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', tag.property);
+        meta.setAttribute('content', tag.content);
+        document.head.appendChild(meta);
+      });
+
+      // Update document title
+      document.title = `${post.title} - Folha News Brasil`;
+
+      // Cleanup on unmount
+      return () => {
+        const tags = document.querySelectorAll('meta[property^="og:"]');
+        tags.forEach(tag => tag.remove());
+      };
+    }
+  }, [post]);
+
   // Generate JSON-LD for SEO
   const jsonLd = post ? {
     "@context": "https://schema.org",
