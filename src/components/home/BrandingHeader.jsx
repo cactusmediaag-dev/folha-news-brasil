@@ -31,8 +31,7 @@ const navItems = [
 { name: "Cidades", href: "/Categoria?slug=cidade" },
 { name: "Turismo", href: "/Categoria?slug=turismo" },
 { name: "Ciência", href: "/Categoria?slug=ciencia" },
-{ name: "Mundo", href: "/Categoria?slug=mundo" },
-{ name: "Música", href: "/Categoria?slug=musica" }];
+{ name: "Mundo", href: "/Categoria?slug=mundo" }];
 
 
 export default function BrandingHeader() {
