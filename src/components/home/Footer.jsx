@@ -126,7 +126,8 @@ export default function Footer() {
               lineHeight: '1.5'
             }}
           >
-            © 2025 Folha News Brasil — Todos os direitos reservados
+            © 2025 Folha News Brasil — Todos os direitos reservados<br />
+            CNPJ: 21.347.751/0001-59 | Fale com a gente: (61) 99173-3642
           </p>
         </div>
       </footer>
