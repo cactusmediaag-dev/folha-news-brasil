@@ -97,6 +97,22 @@ export default function BrandingHeader() {
       <nav className="bg-white border-t border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4">
           <ul className="hidden lg:flex items-center justify-center" style={{ gap: '25px' }}>
+            {/* Guia Folha CTA Button */}
+            <li>
+              <a 
+                href="https://guia.folhanewsbrasil.com.br/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="special-cta-button"
+                title="Acesse o Guia Folha"
+              >
+                <svg className="cta-icon-pulse" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                <span className="cta-text">GUIA FOLHA</span>
+              </a>
+            </li>
+            
             {navItems.map((item, index) =>
             <li key={`${item.name}-${index}`}>
                 {item.dropdown ?
