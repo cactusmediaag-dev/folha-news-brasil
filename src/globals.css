@@ -254,22 +254,24 @@ input, textarea, select {
   display: none;
 }
 
-/* Guia Folha CTA Button - Eyecatcher (Com !important para forçar estilos) */
+/* Guia Folha CTA Button - Laranja com Texto Branco */
 .special-cta-button {
   /* Layout Flex para alinhar ícone e texto */
   display: inline-flex !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 8px !important;
+  vertical-align: middle !important;
   
   /* Tamanho e Forma */
-  padding: 6px 18px !important;
+  padding: 10px 20px !important;
   border-radius: 50px !important; /* Formato Pill */
   margin-right: 20px !important; /* Espaço antes do botão Home */
   
-  /* Cores (O Pulo do Gato) */
-  background-color: #FFFFFF !important; /* Branco Puro */
-  color: #FF6B00 !important; /* Laranja Vibrante */
-  border: 1px solid #FF6B00 !important; /* Borda fina laranja */
+  /* Cores - BOTÃO LARANJA */
+  background-color: #FF6B00 !important; /* Fundo Laranja */
+  color: #FFFFFF !important; /* Texto Branco */
+  border: 2px solid #FF6B00 !important;
   
   /* Tipografia */
   font-family: 'Inter', sans-serif !important;
@@ -278,34 +280,37 @@ input, textarea, select {
   text-transform: uppercase !important;
   text-decoration: none !important;
   letter-spacing: 0.5px !important;
+  line-height: 1 !important;
   
-  /* Sombra/Glow Inicial */
-  box-shadow: 0 0 10px rgba(255, 107, 0, 0.2) !important;
+  /* Sombra/Glow */
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3) !important;
   transition: all 0.3s ease !important;
 }
 
 /* O Ícone (Pulsante) */
 .cta-icon-pulse {
-  color: #FF6B00 !important;
+  color: #FFFFFF !important;
+  flex-shrink: 0 !important;
   animation: icon-heartbeat 1.5s infinite ease-in-out !important;
 }
 
-/* Efeito Hover (Ao passar o mouse) */
+/* Efeito Hover */
 .special-cta-button:hover {
-  background-color: #FF6B00 !important; /* Vira Laranja */
-  color: #FFFFFF !important; /* Texto Branco */
-  box-shadow: 0 0 15px rgba(255, 107, 0, 0.6) !important; /* Brilho aumenta */
+  background-color: #E65F00 !important; /* Laranja mais escuro */
+  color: #FFFFFF !important;
+  border-color: #E65F00 !important;
+  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5) !important;
   transform: translateY(-2px) !important;
 }
 
 .special-cta-button:hover .cta-icon-pulse {
-  color: #FFFFFF !important; /* Ícone fica branco */
-  animation: none !important; /* Para de pulsar para focar */
+  animation: none !important;
+  transform: scale(1.1) !important;
 }
 
 /* A Animação (Keyframes) */
 @keyframes icon-heartbeat {
   0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 0.85; }
   100% { transform: scale(1); opacity: 1; }
 }
