@@ -254,59 +254,58 @@ input, textarea, select {
   display: none;
 }
 
-/* Guia Folha CTA Button - Eyecatcher */
-.btn-guia-folha {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 20px;
-  margin-right: 15px;
-  background: #FFF;
-  color: #FF6B00;
-  border-radius: 50px;
+/* Guia Folha CTA Button - Eyecatcher (Com !important para forçar estilos) */
+.special-cta-button {
+  /* Layout Flex para alinhar ícone e texto */
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  
+  /* Tamanho e Forma */
+  padding: 6px 18px !important;
+  border-radius: 50px !important; /* Formato Pill */
+  margin-right: 20px !important; /* Espaço antes do botão Home */
+  
+  /* Cores (O Pulo do Gato) */
+  background-color: #FFFFFF !important; /* Branco Puro */
+  color: #FF6B00 !important; /* Laranja Vibrante */
+  border: 1px solid #FF6B00 !important; /* Borda fina laranja */
+  
+  /* Tipografia */
   font-family: 'Inter', sans-serif !important;
-  font-weight: 700;
-  font-size: 0.85rem;
-  text-decoration: none;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 107, 0, 0.3);
-  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.15);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  letter-spacing: 0.5px !important;
+  
+  /* Sombra/Glow Inicial */
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
 }
 
-.btn-guia-folha:hover {
-  background: #FF6B00;
-  color: white;
-  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.4);
-  transform: translateY(-1px);
+/* O Ícone (Pulsante) */
+.cta-icon-pulse {
+  color: #FF6B00 !important;
+  animation: icon-heartbeat 1.5s infinite ease-in-out !important;
 }
 
-.btn-guia-folha .icon-guia-pin {
-  width: 16px;
-  height: 16px;
-  color: #FF6B00;
-  animation: pin-pulse 2s infinite ease-in-out;
+/* Efeito Hover (Ao passar o mouse) */
+.special-cta-button:hover {
+  background-color: #FF6B00 !important; /* Vira Laranja */
+  color: #FFFFFF !important; /* Texto Branco */
+  box-shadow: 0 0 15px rgba(255, 107, 0, 0.6) !important; /* Brilho aumenta */
+  transform: translateY(-2px) !important;
 }
 
-.btn-guia-folha:hover .icon-guia-pin {
-  color: white;
-  animation: none;
+.special-cta-button:hover .cta-icon-pulse {
+  color: #FFFFFF !important; /* Ícone fica branco */
+  animation: none !important; /* Para de pulsar para focar */
 }
 
-@keyframes pin-pulse {
-  0% { 
-    transform: scale(1); 
-    opacity: 1; 
-  }
-  50% { 
-    transform: scale(1.2); 
-    opacity: 0.8; 
-  }
-  100% { 
-    transform: scale(1); 
-    opacity: 1; 
-  }
+/* A Animação (Keyframes) */
+@keyframes icon-heartbeat {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+  100% { transform: scale(1); opacity: 1; }
 }
