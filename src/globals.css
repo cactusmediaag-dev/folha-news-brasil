@@ -253,3 +253,60 @@ input, textarea, select {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Guia Folha CTA Button - Eyecatcher */
+.btn-guia-folha {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  margin-right: 15px;
+  background: #FFF;
+  color: #FF6B00;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-guia-folha:hover {
+  background: #FF6B00;
+  color: white;
+  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-guia-folha .icon-guia-pin {
+  width: 16px;
+  height: 16px;
+  color: #FF6B00;
+  animation: pin-pulse 2s infinite ease-in-out;
+}
+
+.btn-guia-folha:hover .icon-guia-pin {
+  color: white;
+  animation: none;
+}
+
+@keyframes pin-pulse {
+  0% { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+  50% { 
+    transform: scale(1.2); 
+    opacity: 0.8; 
+  }
+  100% { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Search, Menu, X, ChevronDown, Newspaper } from "lucide-react";
+import { Search, Menu, X, ChevronDown, Newspaper, MapPin } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -97,6 +97,19 @@ export default function BrandingHeader() {
       <nav className="bg-white border-t border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4">
           <ul className="hidden lg:flex items-center justify-center" style={{ gap: '25px' }}>
+            {/* Guia Folha CTA Button */}
+            <li>
+              <a 
+                href="https://guia.folhanewsbrasil.com.br/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-guia-folha"
+              >
+                <MapPin className="icon-guia-pin" />
+                <span>Guia Folha</span>
+              </a>
+            </li>
+            
             {navItems.map((item, index) =>
             <li key={`${item.name}-${index}`}>
                 {item.dropdown ?
