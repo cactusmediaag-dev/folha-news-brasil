@@ -53,6 +53,7 @@ export const CATEGORY_GRADIENTS = {
   'viagem': 'linear-gradient(135deg, #2980B9 0%, #6DD5FA 100%)',
   'gastronomia': 'linear-gradient(135deg, #eb3349 0%, #f45c43 100%)',
   'viagem-gastronomia': 'linear-gradient(135deg, #AA076B 0%, #61045F 100%)',
+  'policia': 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)',
   'default': 'linear-gradient(135deg, #1A1A1A 0%, #424242 100%)'
 };
 
@@ -80,7 +81,8 @@ export const CATEGORY_LABELS = {
   'curiosidades': 'Curiosidades',
   'viagem': 'Viagem',
   'gastronomia': 'Gastronomia',
-  'viagem-gastronomia': 'Viagem & Gastronomia'
+  'viagem-gastronomia': 'Viagem & Gastronomia',
+  'policia': 'Polícia'
 };
 
 export const CATEGORIES_LIST = [
@@ -113,6 +115,8 @@ export const CATEGORIES_LIST = [
   { value: "cidade", label: "Cidade", group: "local" },
   { value: "local", label: "Local", group: "local" },
   { value: "transporte", label: "Transporte", group: "local" },
+  // Polícia
+  { value: "policia", label: "Polícia", group: "policia" },
 ];
 
 // Função para escurecer cor (para bordas)
