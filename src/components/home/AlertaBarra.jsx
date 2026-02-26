@@ -56,7 +56,8 @@ export default function AlertaBarra() {
 
   return (
     <div className="w-full" style={{ backgroundColor: '#F9FAFB' }}>
-      <div className={`${bgClass} max-w-7xl mx-auto py-2.5 px-4 flex items-center gap-3`} style={{ boxShadow: "0 2px 8px rgba(215,30,31,0.35)" }}>
+      <div className="max-w-7xl mx-auto px-4">
+      <div className={`${bgClass} rounded-lg py-2.5 px-4 flex items-center gap-3`} style={{ boxShadow: "0 2px 8px rgba(215,30,31,0.35)" }}>
         {/* Badge de tipo */}
         <span
           className={`${badgeBg} text-white text-[11px] font-black uppercase tracking-widest px-3 py-1 rounded flex items-center gap-1.5 flex-shrink-0`}
