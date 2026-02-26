@@ -23,7 +23,8 @@ export const CATEGORY_COLORS = {
   'curiosidades': '#F7971E',
   'viagem': '#2980B9',
   'gastronomia': '#eb3349',
-  'viagem-gastronomia': '#AA076B'
+  'viagem-gastronomia': '#AA076B',
+  'policia': '#1a1a2e'
 };
 
 // Gradientes Vibrantes para Headers de Categoria (Alto Contraste)
