@@ -5,6 +5,7 @@ import { base44 } from "@/api/base44Client";
 import TopBar from "@/components/home/TopBar";
 import BrandingHeader from "@/components/home/BrandingHeader";
 import HeaderAdBanner from "@/components/home/HeaderAdBanner";
+import AlertaBarra from "@/components/home/AlertaBarra";
 import HeroMosaic from "@/components/home/HeroMosaic";
 import WebStoriesCarousel from "@/components/home/WebStoriesCarousel";
 import LatestNewsSection from "@/components/home/LatestNewsSection";
