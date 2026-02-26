@@ -67,7 +67,7 @@ export default function Layout({ children, currentPageName }) {
   };
 
   // Define admin pages that should show the admin layout
-  const adminPages = ["Dashboard", "Posts", "PostEditor", "WebStories", "Banners", "WebPush", "Team", "Settings"];
+  const adminPages = ["Dashboard", "Posts", "PostEditor", "WebStories", "Banners", "WebPush", "Team", "Settings", "Alertas"];
   const isAdminPage = adminPages.includes(currentPageName);
 
   // Public pages: render children without admin layout
