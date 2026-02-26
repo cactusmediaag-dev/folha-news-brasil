@@ -28,6 +28,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 const navigation = [
   { name: "Dashboard", page: "Dashboard", icon: LayoutDashboard },
   { name: "Notícias", page: "Posts", icon: FileText },
+  { name: "Alertas", page: "Alertas", icon: AlertTriangle },
   { name: "Web Stories", page: "WebStories", icon: Smartphone },
   { name: "Banners", page: "Banners", icon: Image },
   { name: "Web Push", page: "WebPush", icon: Bell },
