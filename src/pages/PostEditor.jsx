@@ -697,50 +697,24 @@ Retorne APENAS os dados encontrados. Se não encontrar algum campo, retorne stri
                     </Select>
                   </div>
 
-                  <div className="relative">
+                  <div>
                     <Label className="text-sm font-medium text-slate-700">Subcategoria</Label>
-                    <Input
-                      placeholder="Digite para buscar (ex: Futebol)..."
+                    <Select
                       value={post.subcategory || ""}
-                      onChange={(e) => {
-                        setPost({ ...post, subcategory: e.target.value });
-                        setShowSubcategorySuggestions(true);
-                      }}
-                      onFocus={() => setShowSubcategorySuggestions(true)}
-                      onBlur={() => setTimeout(() => setShowSubcategorySuggestions(false), 200)}
-                      className="mt-2 bg-slate-50 border-slate-200 focus:bg-white"
-                    />
-                    {showSubcategorySuggestions && (post.subcategory || "").length > 0 && (
-                      <div className="absolute z-10 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-48 overflow-y-auto">
-                        {subcategorySuggestions
-                          .filter(s => s.toLowerCase().includes((post.subcategory || "").toLowerCase()))
-                          .slice(0, 8)
-                          .map((suggestion, idx) => (
-                            <button
-                              key={idx}
-                              type="button"
-                              className="w-full px-3 py-2 text-left text-sm hover:bg-emerald-50 hover:text-emerald-700 transition-colors border-b border-slate-50 last:border-0"
-                              onClick={() => {
-                                setPost({ ...post, subcategory: suggestion });
-                                setShowSubcategorySuggestions(false);
-                              }}
-                            >
-                              {suggestion}
-                            </button>
-                          ))}
-                        {!subcategorySuggestions.some(s => s.toLowerCase() === (post.subcategory || "").toLowerCase()) && (post.subcategory || "").length > 2 && (
-                          <button
-                            type="button"
-                            className="w-full px-3 py-2 text-left text-sm bg-emerald-50 text-emerald-700 font-medium"
-                            onClick={() => {
-                              setShowSubcategorySuggestions(false);
-                            }}
-                          >
-                            + Criar "{post.subcategory}"
-                          </button>
-                        )}
-                      </div>
-                    )}
+                      onValueChange={(value) => setPost({ ...post, subcategory: value === "__none__" ? "" : value })}
+                    >
+                      <SelectTrigger className="mt-2 bg-slate-50">
+                        <SelectValue placeholder="Selecione a subcategoria..." />
+                      </SelectTrigger>
+                      <SelectContent className="max-h-64">
+                        <SelectItem value="__none__">— Nenhuma —</SelectItem>
+                        {allSubcategories.map((sub, idx) => (
+                          <SelectItem key={idx} value={sub}>
+                            {sub}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
