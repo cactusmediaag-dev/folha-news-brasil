@@ -83,8 +83,7 @@ export default function PostEditor() {
     keywords: "",
     is_featured: false,
   });
-  const [subcategorySuggestions, setSubcategorySuggestions] = useState([]);
-  const [showSubcategorySuggestions, setShowSubcategorySuggestions] = useState(false);
+  const [allSubcategories, setAllSubcategories] = useState([]);
 
   // Seed data para subcategorias
   const SUBCATEGORY_SEEDS = [
