@@ -51,6 +51,9 @@ export default function Home() {
       {/* Header Ad Banner */}
       <HeaderAdBanner />
 
+      {/* Barra de Alerta */}
+      <AlertaBarra />
+
       {/* Hero Mosaic - Sessão 1 */}
       <HeroMosaic posts={sortedPosts} isLoading={isLoading} />
 
