@@ -88,6 +88,9 @@ export default function PostEditor() {
 
   // Seed data para subcategorias
   const SUBCATEGORY_SEEDS = [
+    // Localidades
+    "Acione", "Cuiabá", "São Paulo", "Brasília", "Rondônia", "Interior",
+    "Várzea Grande", "Chapada dos Guimarães", "Governo de MT",
     // Esportes
     "Futebol Brasileiro", "Brasileirão Série A", "Libertadores", "Seleção Brasileira", 
     "Futebol Europeu", "Champions League", "Neymar", "Vini Jr", "Fórmula 1", "UFC", "NBA",
@@ -99,11 +102,11 @@ export default function PostEditor() {
     "Petrobras", "Banco Central", "Selic", "Criptomoedas", "Bitcoin", "Startups",
     // Cidades / Local
     "Trânsito", "Clima e Tempo", "Obras Públicas", "Saúde Municipal", "Polícia Militar", 
-    "Acidentes", "Prefeitura de Cuiabá", "Governo de MT", "Várzea Grande", "Chapada dos Guimarães",
+    "Acidentes", "Prefeitura de Cuiabá",
     // Entretenimento & Mundo
     "Novelas", "Streaming", "Netflix", "Reality Show", "BBB", "Música Sertaneja", 
     "Fofocas", "Cinema", "Hollywood", "Guerra na Ucrânia", "Conflito Oriente Médio", 
-    "Eleições EUA", "Tecnologia", "Inteligência Artificial", "Redes Sociais", "Viral"
+    "Eleições EUA", "Inteligência Artificial", "Redes Sociais", "Viral"
   ];
 
   // Fetch team members for author dropdown
