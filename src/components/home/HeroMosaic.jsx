@@ -51,7 +51,7 @@ export default function HeroMosaic({ posts = [], isLoading = false }) {
   // Loading skeleton apenas se estiver carregando E não tiver posts
   if (isLoading && posts.length === 0) {
     return (
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px 16px' }}>
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '20px 16px' }}>
         <div style={{
           display: 'grid',
           gridTemplateColumns: '2fr 1fr',
