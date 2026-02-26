@@ -123,8 +123,8 @@ export default function PostEditor() {
   // Combine seeds with existing subcategories
   useEffect(() => {
     const dbNames = dbSubcategories.map(s => s.name);
-    const allSubcats = [...new Set([...SUBCATEGORY_SEEDS, ...dbNames])];
-    setSubcategorySuggestions(allSubcats);
+    const combined = [...new Set([...SUBCATEGORY_SEEDS, ...dbNames])].sort();
+    setAllSubcategories(combined);
   }, [dbSubcategories]);
 
   useEffect(() => {
