@@ -13,7 +13,6 @@ import BrandingHeader from "@/components/home/BrandingHeader";
 import Footer from "@/components/home/Footer";
 import InlineAdBanner from "@/components/home/InlineAdBanner";
 import { CATEGORY_COLORS, CATEGORY_LABELS, CATEGORY_GRADIENTS } from "@/components/shared/CategoryColors";
-import { base44 } from "@/api/base44Client";
 
 const POSTS_PER_PAGE = 6;
 
