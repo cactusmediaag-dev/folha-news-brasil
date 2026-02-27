@@ -22,9 +22,17 @@ export default function Categoria() {
   const slug = urlParams.get("slug") || "politica";
   const [currentPage, setCurrentPage] = useState(1);
 
-  const categoryColor = CATEGORY_COLORS[slug] || "#607D8B";
-  const categoryGradient = CATEGORY_GRADIENTS[slug] || CATEGORY_GRADIENTS['default'];
-  const categoryLabel = CATEGORY_LABELS[slug] || slug;
+  // Fetch custom categories from DB to support dynamically-created categories
+  const { data: dbCategories = [] } = useQuery({
+    queryKey: ["categories-db"],
+    queryFn: () => base44.entities.Category.filter({ is_active: true }),
+  });
+
+  const dbCat = dbCategories.find((c) => c.slug === slug);
+  const categoryColor = CATEGORY_COLORS[slug] || dbCat?.color || "#607D8B";
+  const categoryGradient = CATEGORY_GRADIENTS[slug] ||
+    (dbCat ? `linear-gradient(135deg, ${dbCat.gradient_start} 0%, ${dbCat.gradient_end} 100%)` : CATEGORY_GRADIENTS['default']);
+  const categoryLabel = CATEGORY_LABELS[slug] || dbCat?.label || slug;
 
   // Fetch all posts for this category
   const { data: allPosts = [], isLoading } = useQuery({
