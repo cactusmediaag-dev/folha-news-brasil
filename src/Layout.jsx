@@ -33,6 +33,7 @@ const navigation = [
   { name: "Web Stories", page: "WebStories", icon: Smartphone },
   { name: "Banners", page: "Banners", icon: Image },
   { name: "Web Push", page: "WebPush", icon: Bell },
+  { name: "Categorias", page: "Categorias", icon: FolderTree },
   { name: "Equipe", page: "Team", icon: Users },
 ];
 
