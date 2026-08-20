@@ -1,0 +1,54 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role_level": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "editor",
+        "jornalista"
+      ],
+      "default": "jornalista",
+      "description": "N\u00edvel de permiss\u00e3o do usu\u00e1rio"
+    },
+    "department": {
+      "type": "string",
+      "description": "Departamento ou editoria"
+    },
+    "phone": {
+      "type": "string",
+      "description": "Telefone de contato"
+    },
+    "avatar_url": {
+      "type": "string",
+      "description": "URL da foto de perfil"
+    },
+    "bio": {
+      "type": "string",
+      "description": "Biografia curta"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Usu\u00e1rio ativo no sistema"
+    },
+    "last_login": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u00daltimo acesso"
+    },
+    "posts_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de posts publicados"
+    }
+  },
+  "required": [
+    "department",
+    "phone",
+    "avatar_url",
+    "bio",
+    "last_login"
+  ]
+}

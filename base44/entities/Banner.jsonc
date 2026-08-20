@@ -1,0 +1,64 @@
+{
+  "name": "Banner",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nome identificador do banner"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "URL da imagem do banner"
+    },
+    "destination_url": {
+      "type": "string",
+      "description": "Link de destino ao clicar"
+    },
+    "position": {
+      "type": "string",
+      "enum": [
+        "header",
+        "sidebar_top",
+        "sidebar_bottom",
+        "footer",
+        "inline_article",
+        "popup"
+      ],
+      "description": "Posi\u00e7\u00e3o do banner no site"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true,
+      "description": "Banner ativo ou inativo"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de in\u00edcio da exibi\u00e7\u00e3o"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Data de fim da exibi\u00e7\u00e3o"
+    },
+    "views_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Contador de visualiza\u00e7\u00f5es"
+    },
+    "clicks_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Contador de cliques"
+    },
+    "advertiser": {
+      "type": "string",
+      "description": "Nome do anunciante"
+    }
+  },
+  "required": [
+    "name",
+    "image_url",
+    "position"
+  ]
+}

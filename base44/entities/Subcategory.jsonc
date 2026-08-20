@@ -1,0 +1,48 @@
+{
+  "name": "Subcategory",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Nome da subcategoria"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "politica",
+        "economia",
+        "esportes",
+        "entretenimento",
+        "tecnologia",
+        "saude",
+        "educacao",
+        "mundo",
+        "brasil",
+        "local",
+        "cidade",
+        "turismo",
+        "transporte",
+        "musica",
+        "ciencia",
+        "nacional",
+        "auto",
+        "inteligencia-artificial",
+        "nasa",
+        "curiosidades",
+        "viagem",
+        "gastronomia",
+        "viagem-gastronomia",
+        "policia"
+      ],
+      "description": "Categoria pai (opcional)"
+    },
+    "usage_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Contador de uso"
+    }
+  },
+  "required": [
+    "name"
+  ]
+}

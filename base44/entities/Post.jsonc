@@ -1,0 +1,115 @@
+{
+  "name": "Post",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "T\u00edtulo da not\u00edcia"
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Subt\u00edtulo da not\u00edcia"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL amig\u00e1vel (gerada automaticamente)"
+    },
+    "body": {
+      "type": "string",
+      "description": "Corpo da not\u00edcia em Rich Text HTML"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "politica",
+        "economia",
+        "esportes",
+        "entretenimento",
+        "tecnologia",
+        "saude",
+        "educacao",
+        "mundo",
+        "brasil",
+        "local",
+        "cidade",
+        "turismo",
+        "transporte",
+        "musica",
+        "ciencia",
+        "nacional",
+        "auto",
+        "inteligencia-artificial",
+        "nasa",
+        "curiosidades",
+        "viagem",
+        "gastronomia",
+        "viagem-gastronomia",
+        "policia"
+      ],
+      "description": "Categoria da not\u00edcia"
+    },
+    "subcategory": {
+      "type": "string",
+      "description": "Subcategoria opcional (ex: Futebol, Rock, etc.)"
+    },
+    "featured_image": {
+      "type": "string",
+      "description": "URL da imagem de destaque"
+    },
+    "video_url": {
+      "type": "string",
+      "description": "Link do v\u00eddeo (YouTube/Vimeo)"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "scheduled",
+        "archived"
+      ],
+      "default": "draft",
+      "description": "Status da publica\u00e7\u00e3o"
+    },
+    "publish_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data de publica\u00e7\u00e3o"
+    },
+    "author_name": {
+      "type": "string",
+      "description": "Nome do autor"
+    },
+    "author_email": {
+      "type": "string",
+      "description": "Email do autor"
+    },
+    "meta_title": {
+      "type": "string",
+      "description": "SEO - Meta Title"
+    },
+    "meta_description": {
+      "type": "string",
+      "description": "SEO - Meta Description"
+    },
+    "keywords": {
+      "type": "string",
+      "description": "SEO - Keywords separadas por v\u00edrgula"
+    },
+    "views_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Contador de visualiza\u00e7\u00f5es"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Not\u00edcia em destaque na home"
+    }
+  },
+  "required": [
+    "title",
+    "category",
+    "status"
+  ]
+}

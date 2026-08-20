@@ -1,0 +1,47 @@
+{
+  "name": "WebPushConfig",
+  "type": "object",
+  "properties": {
+    "service_name": {
+      "type": "string",
+      "enum": [
+        "onesignal",
+        "firebase",
+        "pusher",
+        "custom"
+      ],
+      "description": "Servi\u00e7o de push utilizado"
+    },
+    "api_key": {
+      "type": "string",
+      "description": "Chave de API do servi\u00e7o"
+    },
+    "app_id": {
+      "type": "string",
+      "description": "ID da aplica\u00e7\u00e3o no servi\u00e7o"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": false,
+      "description": "Configura\u00e7\u00e3o ativa"
+    },
+    "last_push_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Data do \u00faltimo push enviado"
+    },
+    "total_sends": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de notifica\u00e7\u00f5es enviadas"
+    },
+    "subscribers_count": {
+      "type": "number",
+      "default": 0,
+      "description": "Total de inscritos"
+    }
+  },
+  "required": [
+    "service_name"
+  ]
+}
